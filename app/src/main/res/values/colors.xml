@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorAccent">@android:color/black</color>
+
+    <color name="AppColor">#2BCDB8</color>
+
+    <color name="login_gray_color">#B2BABB</color>
+    <color name="name_color">#28B463  </color>
+    <color name="bg_color">#34495E</color>
+    <color name="text_hint_color">#E5E8E8</color>
+
+</resources>

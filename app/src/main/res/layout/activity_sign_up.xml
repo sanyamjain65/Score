@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#34495E"
+    tools:context="mypocketvakil.example.com.score.activity.Sign_up">
+    <RelativeLayout
+        android:layout_width="50sp"
+        android:layout_height="70sp"
+        android:background="@android:color/white"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        >
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="325dp"
+        android:layout_height="380dp"
+        android:background="@drawable/relative"
+        android:layout_marginTop="85sp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/rl_signup">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_marginTop="50dp"
+            android:id="@+id/ll_name"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/et_bg"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp">
+            <mypocketvakil.example.com.score.custom.CustomEditText
+
+                android:id="@+id/et_first_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:hint="First Name"
+
+
+               android:paddingLeft="20dp"
+                android:textColorHint="@color/text_hint_color"
+
+                android:textSize="22sp"
+                app:font="@string/OpenSans_Reguler"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@android:color/white"
+                android:layout_marginLeft="1dp"/>
+            <mypocketvakil.example.com.score.custom.CustomEditText
+
+                android:id="@+id/et_last_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:hint="Last Name"
+                android:paddingLeft="22dp"
+                android:paddingRight="5dp"
+
+
+                android:textColorHint="@color/text_hint_color"
+                android:background="@null"
+                android:textSize="22sp"
+                app:font="@string/OpenSans_Reguler"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/ll_gender"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ll_name"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/et_bg"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp">
+
+            <mypocketvakil.example.com.score.custom.CustomTextView
+                android:layout_width="wrap_content"
+                android:id="@+id/tv_gender"
+
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center"
+
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:text="Gender"
+                android:paddingLeft="20dp"
+
+
+
+
+                android:background="@null"
+                android:textSize="20sp"
+                app:font="@string/OpenSans_Reguler"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@android:color/white"
+                android:layout_marginLeft="10dp"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M"
+                android:id="@+id/rb_m"
+                android:textColor="@color/text_hint_color"
+                android:textSize="22sp"
+
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="F"
+                android:id="@+id/rb_f"
+                android:textColor="@color/text_hint_color"
+
+                android:textSize="22sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="40dp"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/ll_email"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ll_gender"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/et_bg"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp">
+
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/email"
+
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/iv_email"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@android:color/white"
+                android:layout_marginLeft="15dp"
+                />
+            <mypocketvakil.example.com.score.custom.CustomEditText
+
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center"
+
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:hint="Email"
+                android:paddingLeft="20dp"
+                android:paddingRight="5dp"
+
+
+                android:textColorHint="@color/text_hint_color"
+                android:background="@null"
+                android:textSize="22sp"
+                app:font="@string/OpenSans_Reguler"
+                />
+
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/ll_password"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ll_email"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/et_bg"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+               android:src="@drawable/password"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/iv_password"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@android:color/white"
+                android:layout_marginLeft="15dp"
+                />
+            <mypocketvakil.example.com.score.custom.CustomEditText
+
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center"
+
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:hint="Password"
+                android:paddingLeft="20dp"
+                android:paddingRight="5dp"
+
+
+                android:textColorHint="@color/text_hint_color"
+                android:background="@null"
+                android:textSize="22sp"
+                app:font="@string/OpenSans_Reguler"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/ll_dob"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ll_password"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/et_bg"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/dob"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/iv_dob"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@android:color/white"
+                android:layout_marginLeft="15dp"
+                />
+            <mypocketvakil.example.com.score.custom.CustomEditText
+
+                android:id="@+id/et_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center"
+
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:hint="Date of Birth"
+                android:paddingLeft="20dp"
+                android:paddingRight="5dp"
+
+
+                android:textColorHint="@color/text_hint_color"
+                android:background="@null"
+                android:textSize="22sp"
+                app:font="@string/OpenSans_Reguler"
+                />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/ll_phone"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ll_dob"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/et_bg"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/phone"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/iv_phone"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@android:color/white"
+                android:layout_marginLeft="15dp"
+                />
+            <mypocketvakil.example.com.score.custom.CustomEditText
+
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center"
+
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:hint="Phone Number"
+                android:paddingLeft="20dp"
+                android:paddingRight="5dp"
+
+
+                android:textColorHint="@color/text_hint_color"
+                android:background="@null"
+                android:textSize="22sp"
+                app:font="@string/OpenSans_Reguler"
+                />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/ll_tc"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ll_phone"
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:id="@+id/rb_tc"
+
+
+                android:layout_gravity="center"
+                android:layout_marginLeft="23dp"
+                />
+            <mypocketvakil.example.com.score.custom.CustomTextView
+                android:layout_width="wrap_content"
+                android:id="@+id/tv_tv"
+
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:layout_gravity="center"
+
+                android:textColor="#2E4053"
+                android:singleLine="true"
+                android:text="I accept Terms and Condition"
+                android:paddingLeft="5dp"
+
+
+
+
+                android:background="@null"
+                android:textSize="15sp"
+                app:font="@string/OpenSans_Reguler" />
+
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/shape"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:id="@+id/sing_up_image"/>
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_signup"
+
+        android:layout_height="wrap_content"
+
+
+
+        android:textColor="@android:color/white"
+
+        android:text="Sign Up"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:layout_below="@+id/rl_signup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30sp"
+        android:background="@drawable/signup_button"
+        android:textSize="25sp"
+        app:font="@string/OpenSans_Reguler"
+        />
+
+
+
+
+
+</RelativeLayout>
