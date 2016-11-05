@@ -23,26 +23,21 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(SplashActivity.this);
-                acess_token =sharedPref.getString("access_token", null);
+                acess_token = sharedPref.getString("access_token", null);
 //                acess_token=AppSharedPreference.getString(SplashActivity.this, AppSharedPreference.PREF_KEY.Access_token);
 
 
-                if(acess_token==null||acess_token=="")
-                {
-
+                if (acess_token == null || acess_token == "") {
 
 
                     Intent intent = new Intent(SplashActivity.this, Login.class);
                     startActivity(intent);
                     SplashActivity.this.finish();
-                }
-                else
-                {
+                } else {
                     Intent intent = new Intent(SplashActivity.this, Info_wall.class);
                     startActivity(intent);
                     SplashActivity.this.finish();
                 }
-
 
 
             }

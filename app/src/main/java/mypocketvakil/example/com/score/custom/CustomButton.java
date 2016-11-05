@@ -36,7 +36,6 @@ public class CustomButton extends Button {
         String fontName = attributeArray.getString(R.styleable.CustomView_font);
 
 
-
         Typeface customFont = selectTypeface(context, fontName);
         setTypeface(customFont);
 
@@ -47,17 +46,13 @@ public class CustomButton extends Button {
     private Typeface selectTypeface(Context context, String fontName) {
 
         if (fontName.contentEquals(context.getString(R.string.OpenSans_Light))) {
-            return  FontCache.getTypeface("OpenSans-Light.ttf", context);
+            return FontCache.getTypeface("OpenSans-Light.ttf", context);
 
-        }
-        else if(fontName.contentEquals(context.getString(R.string.OpenSans_Reguler))){
-            return  FontCache.getTypeface("OpenSans-Regular.ttf", context);
-        }else if(fontName.contentEquals(context.getString(R.string.OpenSans_Semibold)))
-        {
-            return  FontCache.getTypeface("OpenSans-Semibold.ttf", context);
-        }
-
-        else {
+        } else if (fontName.contentEquals(context.getString(R.string.OpenSans_Reguler))) {
+            return FontCache.getTypeface("OpenSans-Regular.ttf", context);
+        } else if (fontName.contentEquals(context.getString(R.string.OpenSans_Semibold))) {
+            return FontCache.getTypeface("OpenSans-Semibold.ttf", context);
+        } else {
             // no matching font found
             return FontCache.getTypeface("OpenSans-Regular.ttf", context);
         }

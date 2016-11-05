@@ -47,15 +47,13 @@ public class CustomEditText extends AppCompatEditText {
     private Typeface selectTypeface(Context context, String fontName) {
 
         if (fontName.contentEquals(context.getString(R.string.OpenSans_Light))) {
-            return  FontCache.getTypeface("OpenSans-Light.ttf", context);
+            return FontCache.getTypeface("OpenSans-Light.ttf", context);
 
-        }else if(fontName.contentEquals(context.getString(R.string.OpenSans_Reguler))){
-            return  FontCache.getTypeface("OpenSans-Regular.ttf", context);
-        }else if(fontName.contentEquals(context.getString(R.string.OpenSans_Semibold)))
-        {
-            return  FontCache.getTypeface("OpenSans-Semibold.ttf", context);
-        }
-        else {
+        } else if (fontName.contentEquals(context.getString(R.string.OpenSans_Reguler))) {
+            return FontCache.getTypeface("OpenSans-Regular.ttf", context);
+        } else if (fontName.contentEquals(context.getString(R.string.OpenSans_Semibold))) {
+            return FontCache.getTypeface("OpenSans-Semibold.ttf", context);
+        } else {
             // no matching font found
             return FontCache.getTypeface("OpenSans-Regular.ttf", context);
         }

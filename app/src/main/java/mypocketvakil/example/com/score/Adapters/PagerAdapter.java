@@ -8,10 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.identifier.AdvertisingIdClient;
-
 import mypocketvakil.example.com.score.R;
-import mypocketvakil.example.com.score.activity.Info_wall;
 import mypocketvakil.example.com.score.fragment.get;
 import mypocketvakil.example.com.score.fragment.post;
 
@@ -24,13 +21,20 @@ public class PagerAdapter extends FragmentPagerAdapter {
     static String tabTitles[] = new String[]{"Get", "Post"};
 
 
-
-
-    public PagerAdapter(FragmentManager fm,  Context context) {
+    public PagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         //Initializing tab count
 
         this.context = context;
+    }
+
+    public static View getTabView(int position) {
+        View tab = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
+        TextView tv = (TextView) tab.findViewById(R.id.custom_text);
+        tv.setText(tabTitles[position]);
+        return tab;
+
+
     }
 
     @Override
@@ -54,19 +58,11 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
 
     }
+
     @Override
     public CharSequence getPageTitle(int position) {
         // Generate title based on item position
         return tabTitles[position];
-    }
-
-    public static View getTabView(int position) {
-        View tab = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
-        TextView tv = (TextView) tab.findViewById(R.id.custom_text);
-        tv.setText(tabTitles[position]);
-        return tab;
-
-
     }
 
 }

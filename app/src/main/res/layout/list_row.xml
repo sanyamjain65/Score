@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@drawable/list_selector"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:elevation="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+
+
+    >
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_listview_title"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:text="Title"
+        android:paddingLeft="20dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:paddingTop="10dp"
+
+        app:font="@string/OpenSans_Reguler"
+        />
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_listview_posted"
+        android:layout_height="wrap_content"
+        android:textColor="#6E6E6E"
+        android:layout_below="@+id/tv_listview_title"
+        android:layout_alignStart="@+id/tv_listview_title"
+        android:layout_alignLeft="@+id/tv_listview_title"
+        android:text="By:"
+        android:paddingLeft="20dp"
+        android:textSize="15sp"
+
+        app:font="@string/OpenSans_Reguler"
+        />
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_listview_by"
+        android:layout_height="wrap_content"
+        android:textColor="#6E6E6E"
+
+        android:text="Sanyam"
+
+        android:paddingLeft="5dp"
+        android:textSize="15sp"
+
+        app:font="@string/OpenSans_Reguler"
+        android:layout_above="@+id/tv_listview_summary"
+        android:layout_toRightOf="@+id/tv_listview_posted"
+        android:layout_toEndOf="@+id/tv_listview_posted" />
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_listview_summary"
+        android:layout_height="wrap_content"
+        android:textColor="#6E6E6E"
+        android:layout_below="@+id/tv_listview_posted"
+        android:layout_alignStart="@+id/tv_listview_title"
+        android:layout_alignLeft="@+id/tv_listview_title"
+        android:text="Summary"
+        android:paddingLeft="20dp"
+        android:textSize="20sp"
+        android:paddingTop="6dp"
+        app:font="@string/OpenSans_Reguler"
+        />
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_listview_rupee"
+        android:textColor="#0404B4"
+
+        android:text="₹"
+        android:layout_alignTop="@+id/tv_listview_title"
+        android:paddingTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:font="@string/OpenSans_Reguler"
+        android:layout_toLeftOf="@+id/tv_listview_budget"
+        android:layout_marginRight="10dp"
+
+        />
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_listview_budget"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:textColor="#0404B4"
+
+        android:text="budget"
+        android:paddingTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:font="@string/OpenSans_Reguler"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"/>
+
+
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_listview_location"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_color"
+        android:layout_below="@+id/tv_listview_summary"
+        android:layout_alignStart="@+id/tv_listview_title"
+        android:layout_alignLeft="@+id/tv_listview_title"
+        android:text="Loc"
+        android:paddingLeft="20dp"
+        android:textSize="15sp"
+        android:paddingTop="6dp"
+        app:font="@string/OpenSans_Reguler"
+        />
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_listview_bid"
+        android:layout_height="wrap_content"
+        android:textColor="#0404B4"
+
+        android:text=">>Bid"
+        android:paddingTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:font="@string/OpenSans_Reguler"
+        android:paddingRight="16dp"
+        android:layout_alignBottom="@+id/tv_listview_location"
+        android:layout_toRightOf="@+id/tv_listview_location"
+        android:layout_alignLeft="@+id/tv_listview_budget"
+        android:layout_alignStart="@+id/tv_listview_budget"
+        android:layout_alignRight="@+id/tv_listview_budget"
+        android:layout_alignEnd="@+id/tv_listview_budget" />
+</RelativeLayout>

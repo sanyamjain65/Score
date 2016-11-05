@@ -16,35 +16,37 @@ import java.util.Map;
 import mypocketvakil.example.com.score.NetworkParser.NetworkParser;
 import mypocketvakil.example.com.score.ResponseBean.ForgotResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.LoginResponseBean;
+import mypocketvakil.example.com.score.ResponseBean.PostResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.ResetResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.SignUpResponseBean;
 
 /**
  * Created by sanyam jain on 26-09-2016.
  */
-public class NetworkCall
-{
+public class NetworkCall {
     private static NetworkCall instance = null;
 
-     int responseCode;
+    int responseCode;
     private NetworkParser NetworkParser;
+
+    private NetworkCall(Context context) {
+        NetworkParser = new NetworkParser(context.getApplicationContext());
+    }
+
     public static NetworkCall getInstance(Context context) {
         if (instance == null)
             instance = new NetworkCall(context);
         return instance;
     }
-    private NetworkCall(Context context) {
-        NetworkParser = new NetworkParser(context.getApplicationContext());
-    }
 
-    public  SignUpResponseBean signupData(String requestURL, HashMap<String, String> postDataParameters) {
+    public SignUpResponseBean signupData(String requestURL, HashMap<String, String> postDataParameters) {
         String result = performPostCall(requestURL, postDataParameters);
         Log.d("Response: ", "> " + result);
 
         return NetworkParser.parseSignUpData(result);
     }
 
-    public ForgotResponseBean forgotData(String url, HashMap<String,String> postdataparams) {
+    public ForgotResponseBean forgotData(String url, HashMap<String, String> postdataparams) {
 
         String result = performPostCall(url, postdataparams);
         Log.d("Response: ", "> " + result);
@@ -59,6 +61,7 @@ public class NetworkCall
         return NetworkParser.parseResetData(result);
 
     }
+
     public LoginResponseBean loginData(String url, HashMap postdataparams) {
         String result = performPostCall(url, postdataparams);
         Log.d("Response: ", "> " + result);
@@ -67,16 +70,22 @@ public class NetworkCall
 
     }
 
+    public PostResponseBean postData(String url, HashMap postdataparams) {
+        String result = performPostCall(url, postdataparams);
+        Log.d("Response: ", "> " + result);
 
-    private String performPostCall(String url, HashMap<String, String> postDataParams)
-    {
-        String response="";
+        return NetworkParser.parsePostData(result);
+
+    }
+
+    private String performPostCall(String url, HashMap<String, String> postDataParams) {
+        String response = "";
         try {
             URL url1;
 
-            url1=new URL(url);
+            url1 = new URL(url);
 
-            HttpURLConnection conn=(HttpURLConnection) url1.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
             conn.setReadTimeout(25000);
             conn.setConnectTimeout(25000);
             conn.setRequestMethod("POST");
@@ -89,65 +98,49 @@ public class NetworkCall
             wr.close();
             responseCode = conn.getResponseCode();
 
-            if(responseCode==HttpURLConnection.HTTP_OK)
-            {
+            if (responseCode == HttpURLConnection.HTTP_OK) {
                 String line;
-                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                while((line=br.readLine())!= null)
-                {response+=line;}
-            }
-            else if (responseCode==HttpURLConnection.HTTP_CREATED)
-            {
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = br.readLine()) != null) {
+                    response += line;
+                }
+            } else if (responseCode == HttpURLConnection.HTTP_CREATED) {
                 String line;
-                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                while((line=br.readLine())!= null)
-                {response+=line;}
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = br.readLine()) != null) {
+                    response += line;
+                }
+            } else {
+                response = "";
             }
 
-            else
-            {
-                response="";
-            }
-
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 
             e.printStackTrace();
         }
         return response;
 
 
-
-
-
-
-
-
     }
 
-    private  String getPostDataString(HashMap<String, String> params) throws
+    private String getPostDataString(HashMap<String, String> params) throws
             UnsupportedEncodingException {
-        StringBuilder result=new StringBuilder();
-        boolean first=true;
-        for(Map.Entry<String,String> entry :params.entrySet())
-        {
-            if(first)
-                first=false;
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            if (first)
+                first = false;
             else
                 result.append("&");
 
-            result.append(URLEncoder.encode(entry.getKey(),"UTF-8"));
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
             result.append("=");
-            result.append(URLEncoder.encode(entry.getValue(),"UTF-8"));
-
-
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 
 
         }
         return result.toString();
     }
-
 
 
 }

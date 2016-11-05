@@ -12,7 +12,12 @@
 
 
     </style>
-
+    <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
+    <item name="android:textColor">@color/AppColor</item>
+    </style>
+    <style name="TextAppearence.App.Text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
 
 
@@ -20,6 +25,7 @@
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
 
 

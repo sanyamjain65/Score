@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainrelative"
+
+    android:background="#22A697"
+
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/rl1"
+        >
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="200dp"
+            android:layout_height="75dp"
+            android:id="@+id/tv_user_name"
+            android:textSize="25sp"
+            android:text="name"
+            android:paddingBottom="2dp"
+            android:textColor="#34495E"
+            app:font="@string/OpenSans_Reguler"
+            android:paddingTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:background="@android:color/white"
+        android:layout_below="@+id/rl1"
+        android:id="@+id/imagerelative">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="116dp"
+            android:id="@+id/user_myworks"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/working"
+
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/iv_user_works"/>
+
+            <mypocketvakil.example.com.score.custom.CustomTextView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                app:font="@string/OpenSans_Reguler"
+                android:textSize="20sp"
+                android:text=" Works"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="#34495E"
+                >
+
+            </mypocketvakil.example.com.score.custom.CustomTextView>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height= "0.5dp"
+            android:layout_marginLeft="65dp"
+            android:background="#D3D3D3"
+            android:layout_alignBottom="@+id/user_myworks"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="176dp"
+            android:id="@+id/user_myposts"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/post"
+
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/iv_user_posts"/>
+
+            <mypocketvakil.example.com.score.custom.CustomTextView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                app:font="@string/OpenSans_Reguler"
+                android:textSize="20sp"
+                android:text=" Posts"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="#34495E"
+                >
+
+            </mypocketvakil.example.com.score.custom.CustomTextView>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height= "0.5dp"
+            android:layout_marginLeft="65dp"
+            android:background="#D3D3D3"
+            android:layout_alignBottom="@+id/user_myposts"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="236dp"
+            android:id="@+id/user_mywallet"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/wallet"
+
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/iv_user_wallet"/>
+
+            <mypocketvakil.example.com.score.custom.CustomTextView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                app:font="@string/OpenSans_Reguler" android:textSize="20sp"
+                android:text=" Wallet"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="#34495E"
+                >
+
+            </mypocketvakil.example.com.score.custom.CustomTextView>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height= "0.5dp"
+            android:layout_marginLeft="65dp"
+            android:background="#D3D3D3"
+            android:layout_alignBottom="@+id/user_mywallet"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="296dp"
+            android:id="@+id/user_myaccount"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/user"
+
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/iv_user_account"/>
+
+            <mypocketvakil.example.com.score.custom.CustomTextView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+
+                android:layout_marginLeft="20dp"
+                app:font="@string/OpenSans_Reguler"
+                android:textSize="20sp"
+                android:text=" Account"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="#34495E"
+                >
+
+            </mypocketvakil.example.com.score.custom.CustomTextView>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height= "0.5dp"
+            android:layout_marginLeft="65dp"
+            android:background="#D3D3D3"
+            android:layout_alignBottom="@+id/user_myaccount"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+
+
+    </RelativeLayout>
+<!--
+    <RelativeLayout
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/up_bg"
+        android:id="@+id/relativeLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="70dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/avatar"
+            android:id="@+id/mainimage"
+            android:paddingTop="3dp"
+            android:background="@drawable/up_bg"></ImageView>
+             </RelativeLayout>
+-->
+    <ImageView
+
+        android:id="@+id/mainimage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/avatar"
+        android:background="@drawable/pic_border"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="70dp"/>
+
+
+</RelativeLayout>
+

@@ -24,10 +24,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
 
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.github.akashandroid90.googlesupport:google-support-location:1.11'
-    compile 'com.google.android.gms:play-services:9.6.1'
-
+    compile 'com.google.android.gms:play-services-maps:9.6.1'
+    compile 'com.google.android.gms:play-services-places:9.6.1'
 }
