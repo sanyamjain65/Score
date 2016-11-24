@@ -14,7 +14,7 @@ import mypocketvakil.example.com.score.activity.Reset_password;
  * Created by sanyam jain on 27-09-2016.
  */
 public class ResetAsyncTask extends AsyncTask<ResetResponseBean, ResetResponseBean, ResetResponseBean> {
-    private static final String url = "http://192.168.0.118:138/reset/";
+    private static final String url = "http://172.16.101.109:138/reset/";
     ProgressDialog progressDialog;
     private HashMap postdataparams;
     private Context context;

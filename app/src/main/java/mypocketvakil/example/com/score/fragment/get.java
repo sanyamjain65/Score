@@ -45,21 +45,7 @@ public class get extends Fragment {
         contactlist = new ArrayList<>();
 
         cont = getActivity();
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(true);
 
-                        fetchRefresh();
-                    }
-                }, 2000);
-
-            }
-        });
 
 
         listView = (ListView) view.findViewById(R.id.list);

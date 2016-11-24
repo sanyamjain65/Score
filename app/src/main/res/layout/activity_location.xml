@@ -42,39 +42,39 @@
         app:font="@string/OpenSans_Reguler"
         />
         -->
-   <ImageView
-       android:layout_width="50dp"
-       android:layout_height="50dp"
-       android:src="@drawable/question"
-       android:id="@+id/iv_map_question"
-       android:layout_marginBottom="60dp"
-       android:layout_alignParentBottom="true"
-       android:layout_alignParentRight="true"
-       android:layout_alignParentEnd="true"
-       android:layout_marginRight="10dp"
-       android:layout_marginEnd="10dp"
-       />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/swap"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/tv_confirm"
+        android:layout_marginBottom="60dp"
+        android:id="@+id/iv_swap"
+        android:layout_marginRight="6dp"/>
     <mypocketvakil.example.com.score.custom.CustomTextView
         android:layout_width="match_parent"
-        android:id="@+id/tv_map_help"
+        android:id="@+id/tv_confirm"
 
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
 
 
 
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@android:color/white"
 
-        android:text="@string/info"
-        android:layout_toLeftOf="@+id/iv_map_question"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:textSize="@dimen/twenty"
-        app:font="@string/OpenSans_Reguler"
-        android:layout_marginBottom="70dp"
+        android:text="@string/tap"
+
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="60dp"
-        android:background="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:background="@color/AppColor"
+        android:gravity="center"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
 
-
+        android:layout_marginBottom="6dp"
+        android:textSize="15sp"
+        app:font="@string/OpenSans_Reguler"
         />
 
 </RelativeLayout>

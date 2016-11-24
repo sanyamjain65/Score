@@ -14,7 +14,7 @@ import mypocketvakil.example.com.score.activity.Forgot;
  * Created by sanyam jain on 27-09-2016.
  */
 public class ForgotAsyncTask extends AsyncTask<ForgotResponseBean, ForgotResponseBean, ForgotResponseBean> {
-    private static final String url = "http://192.168.0.118:138/email/";
+    private static final String url = "http://172.16.101.109:138/email/";
     ProgressDialog progressDialog;
     private HashMap postdataparams;
     private Context context;

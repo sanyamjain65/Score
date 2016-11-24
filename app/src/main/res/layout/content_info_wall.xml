@@ -11,14 +11,22 @@
     tools:showIn="@layout/app_bar_info_wall">
 
 
+
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/login_gray_color"
-        android:dividerHeight="1dp"
-        android:background="@android:color/white"
 
-        android:listSelector="@drawable/list_selector" />
+
+
+        android:layout_marginTop="16dp"
+        android:dividerHeight="10dp"
+        android:divider="@android:color/white"
+
+        android:background="#F9F8F8"
+
+
+        android:listSelector="@drawable/list_selector"
+         />
 
 </RelativeLayout>

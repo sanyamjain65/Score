@@ -54,21 +54,22 @@ public class Sign_up extends AppCompatActivity {
         dob = (EditText) findViewById(R.id.et_dob);
         myCalendar = Calendar.getInstance();
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-        };
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel();
+                    }
+                };
                 // TODO Auto-generated method stub
                 new DatePickerDialog(Sign_up.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -122,44 +123,52 @@ public class Sign_up extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email1 = email.getText().toString();
-                if (password.getText().toString().trim().equals("")) {
-
-                    password.setError("Password is required!");
-
-                }
-                if (dob.getText().toString().trim().equals("")) {
-
-                    dob.setError("Date of Birth is required!");
-
-                }
-                if (number.getText().toString().trim().equals("")) {
-
-                    number.setError("Phone number is required!");
-
-                }
-                if (email.getText().toString().trim().equals("")) {
-
-                    email.setError("Email is required!");
-
-                }
+                 String email1 = email.getText().toString();
+                 String pass = password.getText().toString();
+                 String pnum = number.getText().toString();
+                String dat=dob.getText().toString();
                 if (firstname.getText().toString().trim().equals("")) {
 
                     firstname.setError("First Name is required!");
 
                 }
-                if (!isValidEmail(email1)) {
+                else if (email.getText().toString().trim().equals("")) {
+
+                    email.setError("Email is required!");
+
+                }
+                else if (!isValidEmail(email1)) {
                     email.setError("Invalid Email");
                 }
+               else  if (password.getText().toString().trim().equals("")) {
 
-                final String pass = password.getText().toString();
-                if (!isValidPassword(pass)) {
+                    password.setError("Password is required!");
+
+                }
+                else if (!isValidPassword(pass))
+                {
                     password.setError("less than 6 char");
                 }
-                final String pnum = number.getText().toString();
-                if (!isValidPhonenumber(pnum)) {
+                else if (dat.equals("")) {
+
+                    dob.setError("Date of Birth is required!");
+
+                }
+               else if (number.getText().toString().trim().equals("")) {
+
+                    number.setError("Phone number is required!");
+
+                }
+                else  if (!isValidPhonenumber(pnum)) {
                     number.setError("Invalid Phone Number");
-                } else {
+                }
+
+
+
+
+
+
+                else {
                     String fname = firstname.getText().toString();
                     String lname = lastname.getText().toString();
                     name = fname +" "+ lname;

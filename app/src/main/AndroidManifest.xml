@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -19,22 +19,18 @@
             android:label="Score"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden">
-
-
-        </activity>
-        <activity android:name=".activity.Login">
-
-
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity android:name=".activity.Login"></activity>
         <activity android:name=".activity.Forgot" />
         <activity android:name=".activity.Reset_password" />
-        <activity android:name=".SplashActivity" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".SplashActivity">
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,21 +41,17 @@
         <activity
             android:name=".activity.Info_wall"
             android:label="@string/title_activity_info_wall"
-            android:theme="@style/AppTheme">
-
-
-
-        </activity>
+            android:theme="@style/AppTheme"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA8sQXGPJgWufwxjUOplNPJ8psD2tzdTi4" />
 
-        <activity android:name=".activity.Location" />
-        <activity android:name=".activity.user">
+        <activity android:name=".activity.Location"></activity>
+        <activity android:name=".activity.user"></activity>
+        <activity android:name=".activity.example">
 
         </activity>
-
     </application>
 
 </manifest>

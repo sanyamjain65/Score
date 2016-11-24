@@ -98,7 +98,7 @@ public class NetworkCall {
             wr.close();
             responseCode = conn.getResponseCode();
 
-            if (responseCode == HttpURLConnection.HTTP_OK) {
+            if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
                 String line;
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 while ((line = br.readLine()) != null) {

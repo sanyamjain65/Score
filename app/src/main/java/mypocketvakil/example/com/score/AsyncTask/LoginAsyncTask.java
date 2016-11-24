@@ -15,7 +15,7 @@ import mypocketvakil.example.com.score.activity.Login;
  */
 public class LoginAsyncTask extends AsyncTask<LoginResponseBean, LoginResponseBean, LoginResponseBean> {
 
-    private static final String url = "http://192.168.0.118:138/login/";
+    private static final String url = "http://172.16.101.109:138/login/";
     ProgressDialog progressDialog;
     private HashMap postdataparams;
     private Context context;

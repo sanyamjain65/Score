@@ -29,8 +29,29 @@
     <string name="hours">Hours</string>
     <string name="next">Next</string>
     <string name="info">Tap on map for Location</string>
+    <string name="destination">Destination</string>
+    <string name="delivery">Delivery</string>
+    <string name="spinner_title">Select Category</string>
+    <string name="spinner_title1">Select Duration</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="time">When do you want it</string>
+    <string name="time1">Anytime</string>
+    <string name="money">Budget</string>
+    <string name="sign">₹</string>
+    <string name="details">Details</string>
+    <string name="optional">Optional</string>
+    <string name="submit">Submit</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="cancel">Cancel</string>
+    <string name="min">Min</string>
+    <string name="dash">-</string>
+    <string name="max">Max</string>
+    <string name="current">Current Location</string>
+    <string name="choose">Choose location</string>
+    <string name="change">Change?</string>
+    <string name="tap">Tap anywhere to select location</string>
 </resources>

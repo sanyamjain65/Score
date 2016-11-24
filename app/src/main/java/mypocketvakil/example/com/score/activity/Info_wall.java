@@ -36,6 +36,7 @@ import mypocketvakil.example.com.score.JavaClasses.CircleTransform;
 import mypocketvakil.example.com.score.NetworkCall.HttpHandler;
 import mypocketvakil.example.com.score.Preferences.SharedPreference;
 import mypocketvakil.example.com.score.R;
+import mypocketvakil.example.com.score.fragment.Fragment_post;
 import mypocketvakil.example.com.score.fragment.get;
 import mypocketvakil.example.com.score.fragment.post;
 import mypocketvakil.example.com.score.fragment.post2;
@@ -43,7 +44,7 @@ import mypocketvakil.example.com.score.fragment.post2;
 public class Info_wall extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = Info_wall.class.getSimpleName();
-    private static final String url = "http://192.168.0.118:138/post/";
+    private static final String url = "http://172.16.101.109:138/post/";
     ListView listView;
     TextView name,tv_nav_name,tv_nav_email;
     ProgressDialog progressDialog;
@@ -53,6 +54,7 @@ public class Info_wall extends AppCompatActivity
     private TabLayout tabLayout;
     String name1,mail;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +63,21 @@ public class Info_wall extends AppCompatActivity
 
         setSupportActionBar(toolbar);
         contactlist = new ArrayList<>();
-
-
+//        Fragment_post f1=new Fragment_post();
+//
+//        Intent intent=getIntent();
+//        String frag = intent.getExtras().getString("frag");
+//        if(frag.equals("fragment"))
+//        {
+//            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f1).addToBackStack(null).commit();
+//        }
 
 
 //        get newfrag=new get();
 //
 //        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,newfrag).commit();
         listView = (ListView) findViewById(R.id.list);
-        new getContacts().execute();
+//        new getContacts().execute();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -154,6 +162,7 @@ public class Info_wall extends AppCompatActivity
     }
 
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -173,6 +182,7 @@ public class Info_wall extends AppCompatActivity
         // Handle navigation view item clicks here.
         get fragment = new get();
         post newFragment = new post();
+        Fragment_post frag=new Fragment_post();
         final post2 newFrag = new post2();
         name = (TextView) findViewById(R.id.tv_toolbar_name);
 
@@ -190,7 +200,7 @@ public class Info_wall extends AppCompatActivity
         } else if (id == R.id.post) {
 
             listView.setVisibility(View.INVISIBLE);
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, newFragment).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag).addToBackStack(null).commit();
 
             name.setText("POST");
 
@@ -220,6 +230,16 @@ public class Info_wall extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void onSignUpFailed(String responseString) {
+        Intent i=new Intent (Info_wall.this,user.class);
+        startActivity(i);
+    }
+
+    public void onSuccessfulSignUp(String responseString) {
+        Intent intent=new Intent(Info_wall.this,Login.class);
+        startActivity(intent);
     }
 
 

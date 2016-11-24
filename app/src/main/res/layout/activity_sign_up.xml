@@ -280,7 +280,8 @@
                 android:hint="Date of Birth"
                 android:paddingLeft="20dp"
                 android:paddingRight="5dp"
-
+                android:focusableInTouchMode="false"
+                android:editable="false"
 
                 android:textColorHint="@color/text_hint_color"
                 android:background="@null"

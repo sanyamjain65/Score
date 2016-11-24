@@ -52,7 +52,7 @@ public class user extends AppCompatActivity {
     //captured picture uri
     private Uri picUri;
     String name1;
-    public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
+  /*  public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
                                    boolean filter) {
         float ratio = Math.min(
                 (float) maxImageSize / realImage.getWidth(),
@@ -67,7 +67,7 @@ public class user extends AppCompatActivity {
                 height, filter);
         return newBitmap;
     }
-
+*/
     /**
      *
      * @param finalBitmap
@@ -135,7 +135,7 @@ public class user extends AppCompatActivity {
 
 
                 picView.setImageBitmap(circleBitmap);
-                saveImage(circleBitmap);
+
             }
 
         }

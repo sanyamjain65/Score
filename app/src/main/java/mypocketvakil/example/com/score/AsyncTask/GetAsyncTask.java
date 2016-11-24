@@ -19,7 +19,7 @@ import mypocketvakil.example.com.score.fragment.get;
  */
 public class GetAsyncTask extends AsyncTask<Void, Void, Void> {
     private static final String TAG = GetAsyncTask.class.getSimpleName();
-    private static final String url = "http://192.168.0.118:138/post/";
+    private static final String url = "http://172.16.101.109:138/post/";
     ProgressDialog progressDialog;
     String jsonStr;
     ArrayList<HashMap<String, String>> contactlist;
