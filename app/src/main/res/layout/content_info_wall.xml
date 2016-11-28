@@ -12,21 +12,41 @@
 
 
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="fill_parent"
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/map1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+    </android.support.v7.widget.Toolbar>
+    <ImageView
+
+        android:id="@+id/iv_wall"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/instagram"
+        android:background="@drawable/round_pic"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"/>
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
 
 
-
-        android:layout_marginTop="16dp"
-        android:dividerHeight="10dp"
-        android:divider="@android:color/white"
-
-        android:background="#F9F8F8"
-
-
-        android:listSelector="@drawable/list_selector"
-         />
+        />
 
 </RelativeLayout>

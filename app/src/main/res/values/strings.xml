@@ -54,4 +54,17 @@
     <string name="choose">Choose location</string>
     <string name="change">Change?</string>
     <string name="tap">Tap anywhere to select location</string>
+    <string name="info_window_title">Title</string>
+    <string name="distance">Distance:</string>
+    <string name="rupee_sign">₹</string>
+    <string name="hypen">-</string>
+    <string name="bid">Bid</string>
+    <string name="you_are_here">You are here</string>
+    <string name="info_window_category">Category:</string>
+    <string name="info_window_category1">Type</string>
+    <string name="payment">Payment:</string>
+    <string name="payment_mode">Mode</string>
+    <string name="details1">Details:</string>
+    <string name="km">KM</string>
+    <string name="place_bid">Place your Bid</string>
 </resources>

@@ -31,10 +31,16 @@ public class Login extends AppCompatActivity {
     private TextView tv_login_signup;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
+
+
+
+
         tv_login = (TextView) findViewById(R.id.tv_login);
         tv_login_forget = (TextView) findViewById(R.id.tv_login_forgot);
         tv_login_signup = (TextView) findViewById(R.id.tv_login_signup);
@@ -51,10 +57,14 @@ public class Login extends AppCompatActivity {
                         Intent intent = new Intent(Login.this, Sign_up.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//
+//
+//
                     }
                 }, 50);
             }
-        });
+            });
+
         tv_login_forget.setOnClickListener(new View.OnClickListener() {
 
 

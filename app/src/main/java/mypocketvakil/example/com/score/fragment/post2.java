@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.akashandroid90.googlesupport.location.AppLocationFragment;
+import com.github.akashandroid90.googlesupport.location.AppLocationSupportFragment;
 import com.google.android.gms.common.ConnectionResult;
 
 import java.util.Calendar;
@@ -23,7 +24,7 @@ import mypocketvakil.example.com.score.R;
 import mypocketvakil.example.com.score.activity.Location;
 
 
-public class post2 extends AppLocationFragment {
+public class post2 extends AppLocationSupportFragment {
     EditText et_post2_budget;
     RadioButton rb_days, rb_hours;
     EditText et_post2_days;

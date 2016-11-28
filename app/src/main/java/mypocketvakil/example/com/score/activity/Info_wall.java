@@ -1,12 +1,18 @@
 package mypocketvakil.example.com.score.activity;
 
+import android.app.AlarmManager;
+import android.app.Dialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,33 +22,48 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
+import mypocketvakil.example.com.score.AsyncTask.BidAsyncTask;
 import mypocketvakil.example.com.score.JavaClasses.CircleTransform;
+import mypocketvakil.example.com.score.JavaClasses.GeoLoc;
 import mypocketvakil.example.com.score.NetworkCall.HttpHandler;
+import mypocketvakil.example.com.score.NetworkCall.NetworkKeys;
 import mypocketvakil.example.com.score.Preferences.SharedPreference;
 import mypocketvakil.example.com.score.R;
+import mypocketvakil.example.com.score.Services.SimpleWakefulService;
 import mypocketvakil.example.com.score.fragment.Fragment_post;
 import mypocketvakil.example.com.score.fragment.get;
 import mypocketvakil.example.com.score.fragment.post;
 import mypocketvakil.example.com.score.fragment.post2;
 
-public class Info_wall extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class Info_wall extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,OnMapReadyCallback {
+    GeoLoc g=new GeoLoc().getInstance();
     private static final String TAG = Info_wall.class.getSimpleName();
     private static final String url = "http://172.16.101.109:138/post/";
     ListView listView;
@@ -52,8 +73,33 @@ public class Info_wall extends AppCompatActivity
     String jsonStr;
     ArrayList<HashMap<String, String>> contactlist;
     private TabLayout tabLayout;
-    String name1,mail;
+    String name1,mail,id;
+    GoogleMap map;
+    int l;
+    ProgressBar progressBar;
+    double lat[]=new double[20];
+    double longi[]=new double[20];
+    String title[]=new String[20];
+    String budget_min[]=new String[20];
+    String budget_max[]=new String[20];
+    String category[]=new String[20];
+    String time[]=new String[20];
+    String description[]=new String[20];
+    String distance[]=new String[20];
+    String payment[]=new String[20];
+    String user_id[]=new String[20];
+    String id1[]=new String[20];
 
+
+    HashMap<String,String> postdataparams;
+    String bid;
+    RelativeLayout content_frame;
+
+    int c=0;
+    int a,b;
+    Marker marker[]=new Marker[500];
+    Marker current;
+    double latitude,longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +108,29 @@ public class Info_wall extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
+
+        Calendar cur_cal = Calendar.getInstance();
+        cur_cal.setTimeInMillis(System.currentTimeMillis());
+        Log.d("Testing", "Calender Set time:" + cur_cal.getTime());
+        Intent intent = new Intent(Info_wall.this, SimpleWakefulService.class);
+        Log.d("Testing", "Intent created");
+        PendingIntent pi = PendingIntent.getService(Info_wall.this, 0, intent, 0);
+        AlarmManager alarm_manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarm_manager.setRepeating(AlarmManager.RTC, cur_cal.getTimeInMillis(), 60000, pi);
+        Log.d("Testing", "alarm manager set");
+        Toast.makeText(Info_wall.this, "ServiceClass.onCreate()", Toast.LENGTH_LONG).show();
+
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map1);
+
+        mapFragment.getMapAsync(Info_wall.this);
         contactlist = new ArrayList<>();
+        progressBar=(ProgressBar)findViewById(R.id.progressBar1);
+        content_frame=(RelativeLayout)findViewById(R.id.content_frame);
+//        progressBar.setVisibility(View.GONE);
+        latitude=g.getLatitude();
+        longitude=g.getLongitude();
 //        Fragment_post f1=new Fragment_post();
 //
 //        Intent intent=getIntent();
@@ -76,7 +144,7 @@ public class Info_wall extends AppCompatActivity
 //        get newfrag=new get();
 //
 //        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,newfrag).commit();
-        listView = (ListView) findViewById(R.id.list);
+//        listView = (ListView) findViewById(R.id.list);
 //        new getContacts().execute();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -184,31 +252,49 @@ public class Info_wall extends AppCompatActivity
         post newFragment = new post();
         Fragment_post frag=new Fragment_post();
         final post2 newFrag = new post2();
-        name = (TextView) findViewById(R.id.tv_toolbar_name);
-
+//        name = (TextView) findViewById(R.id.tv_toolbar_name);
+//
         int id = item.getItemId();
 
         if (id == R.id.home) {
 
-            for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); ++i) {
-                getSupportFragmentManager().popBackStack();
-            }
-
-            listView.setVisibility(View.VISIBLE);
-            name.setText("FEED");
+//            for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); ++i) {
+//                getSupportFragmentManager().popBackStack();
+//            }
+//
+//            listView.setVisibility(View.VISIBLE);
+//            name.setText("FEED");
 
         } else if (id == R.id.post) {
 
-            listView.setVisibility(View.INVISIBLE);
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag).addToBackStack(null).commit();
+//            listView.setVisibility(View.INVISIBLE);
+//            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, frag).addToBackStack(null).commit();
 
-            name.setText("POST");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent i=new Intent(Info_wall.this,Post.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                }
+            },200);
+
+
+//            name.setText("POST");
 
 
         } else if (id == R.id.profile) {
-            Intent i = new Intent(Info_wall.this, user.class);
-            startActivity(i);
-            this.finish();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent i = new Intent(Info_wall.this, user.class);
+                    startActivity(i);
+
+                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    finish();
+                }
+            },200);
+
 
         } else if (id == R.id.settings) {
 
@@ -232,40 +318,183 @@ public class Info_wall extends AppCompatActivity
         return true;
     }
 
-    public void onSignUpFailed(String responseString) {
-        Intent i=new Intent (Info_wall.this,user.class);
-        startActivity(i);
+    @Override
+    public void onMapReady(final GoogleMap googleMap) {
+        map=googleMap;
+        final LatLng latLng = new LatLng(latitude, longitude);
+        current= googleMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        current.setTag(250);
+        new getContacts().execute();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            }
+        },2000);
+
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                a = (int) marker.getTag();
+                if (a == 250) {
+                    googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            View w = getLayoutInflater().inflate(R.layout.info_current, null);
+
+                            return w;
+
+
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+                            View w = getLayoutInflater().inflate(R.layout.info_current, null);
+
+                            return w;
+                        }
+                    });
+
+                } else {
+                    googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            View v = getLayoutInflater().inflate(R.layout.info_window, null);
+                            TextView tv_title = (TextView) v.findViewById(R.id.tv_title);
+                            TextView tv_location = (TextView) v.findViewById(R.id.tv_location);
+                            TextView tv_min = (TextView) v.findViewById(R.id.tv_min);
+                            TextView tv_max = (TextView) v.findViewById(R.id.tv_max);
+                            tv_title.setText(title[a]);
+                            tv_location.setText(distance[a]);
+                            tv_min.setText(budget_min[a]);
+                            tv_max.setText(budget_max[a]);
+
+                            return v;
+                        }
+
+                        @Override
+                        public View getInfoContents(Marker marker) {
+                            View v = getLayoutInflater().inflate(R.layout.info_window, null);
+
+                            return v;
+                        }
+                    });
+                }
+                    return false;
+                }
+
+        });
+
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                b= (int) marker.getTag();
+                if(b==250)
+                {
+
+                }
+
+                else
+                {
+                    final Dialog dialog = new Dialog(Info_wall.this);
+                    // Include dialog.xml file
+                    dialog.setContentView(R.layout.info_more);
+                    TextView tv_info_title=(TextView)dialog.findViewById(R.id.tv_info_title);
+                    TextView tv_info_category1=(TextView)dialog.findViewById(R.id.tv_info_category1);
+                    TextView tv_info_payment_mode=(TextView)dialog.findViewById(R.id.tv_info_payment_mode);
+                    TextView tv_info_time=(TextView)dialog.findViewById(R.id.tv_info_time);
+                    TextView tv_info_description=(TextView)dialog.findViewById(R.id.tv_info_description);
+                    TextView tv_info_location=(TextView)dialog.findViewById(R.id.tv_info_location);
+                    TextView tv_info_min=(TextView)dialog.findViewById(R.id.tv_info_min);
+                    TextView tv_info_max=(TextView)dialog.findViewById(R.id.tv_info_max);
+                    TextView tv_info_submit=(TextView)dialog.findViewById(R.id.tv_info_submit);
+                    final EditText et_info_bid=(EditText)dialog.findViewById(R.id.et_info_bid);
+                    tv_info_title.setText(title[b]);
+                    tv_info_category1.setText(category[b]);
+                    tv_info_payment_mode.setText(payment[b]);
+                    tv_info_time.setText(time[b]);
+                    tv_info_description.setText(description[b]);
+                    tv_info_location.setText(distance[b]);
+                    tv_info_min.setText(budget_min[b]);
+                    tv_info_max.setText(budget_max[b]);
+                    dialog.show();
+
+
+                    tv_info_submit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Info_wall.this);
+                            id = String.valueOf(sharedPref.getInt("id", -1));
+                            String identity=id1[b];
+                            postdataparams=new HashMap<String, String>();
+                            postdataparams.put("post_id",identity);         //id of user
+                            postdataparams.put("bid",et_info_bid.getText().toString());
+                            postdataparams.put("user_id",id);                //id of user who bids
+                            BidAsyncTask task=new BidAsyncTask(Info_wall.this,postdataparams,identity);
+                            task.execute();
+                            dialog.dismiss();
+                        }
+                    });
+
+
+
+
+
+
+                }
+
+            }
+        });
+
+
+
+
+
     }
 
-    public void onSuccessfulSignUp(String responseString) {
-        Intent intent=new Intent(Info_wall.this,Login.class);
-        startActivity(intent);
-    }
+
 
 
     private class getContacts extends AsyncTask<Void, Void, Void> {
+
+
+
         @Override
         protected Void doInBackground(Void... params) {
             HttpHandler sh = new HttpHandler();
-            jsonStr = sh.makeServiceCall(url);
+            jsonStr = sh.makeServiceCall(NetworkKeys.NET_KEY.POST_URL);
             Log.e(TAG, "Response from url: " + jsonStr);
             if (jsonStr != null) {
                 try {
                     JSONArray contacts = new JSONArray(jsonStr);
+                    l=contacts.length();
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
 
-                        String title = c.getString("title");
-                        String summary = c.getString("summary");
-                        String budget = c.getString("budget");
+                        lat[i] = Double.parseDouble(c.getString("dest_lat"));
+                        longi[i]= Double.parseDouble(c.getString("dest_long"));
 
 
-                        HashMap<String, String> contact = new HashMap<>();
-                        contact.put("title", title);
-                        contact.put("summary", summary);
-                        contact.put("budget", budget);
+                        id1[i]=c.getString("id");
+                        title[i]=c.getString("work");
+                        budget_min[i]=c.getString("budget_min");
+                        budget_max[i]=c.getString("budget_max");
+                        distance[i]=c.getString("near_by");
+                        payment[i]=c.getString("payment");
+                        category[i]=c.getString("category");
+                        description[i]=c.getString("details");
+                        time[i]=c.getString("time");
+                        user_id[i]=c.getString("user_id");
 
-                        contactlist.add(contact);
+
+
+
+
+
 
 
                     }
@@ -281,22 +510,56 @@ public class Info_wall extends AppCompatActivity
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new ProgressDialog(Info_wall.this);
-            progressDialog.setMessage("Loading...");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
+            progressBar.setVisibility(View.VISIBLE);
+
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (progressDialog.isShowing()) {
-                progressDialog.dismiss();
+            if (progressBar.isShown()) {
+                progressBar.setVisibility(View.GONE);
             }
-            ListAdapter listAdapter = new SimpleAdapter(Info_wall.this, contactlist, R.layout.list_row, new String[]{"title", "summary", "budget"}, new int[]{R.id.tv_listview_title, R.id.tv_listview_summary, R.id.tv_listview_budget});
-            listView.setAdapter(listAdapter);
+
+            for ( int i=0;i<l;i++)
+            {
+//            drawMarker(new LatLng(lat[i],longi[i]));
+                LatLng ll=new LatLng(lat[i],longi[i]);
+                marker[i]=map.addMarker(new MarkerOptions()
+                        .position(ll)
+
+                );
+                marker[i].setTag(i);
+//                map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+//                    @Override
+//                    public View getInfoWindow(Marker marker) {
+//
+//
+//                    }
+//
+//                    @Override
+//                    public View getInfoContents(Marker marker) {
+//
+//
+//                    }
+//                });
+            }
+//            ListAdapter listAdapter = new SimpleAdapter(Info_wall.this, contactlist, R.layout.list_row, new String[]{"title", "summary", "budget"}, new int[]{R.id.tv_listview_title, R.id.tv_listview_summary, R.id.tv_listview_budget});
+//            listView.setAdapter(listAdapter);
+
 
         }
 
+    }
+    public void onSuccessfulSignUp(String responseString) {
+
+        Snackbar snack = Snackbar.make(content_frame, responseString, Snackbar.LENGTH_LONG);
+        snack.show();
+
+    }
+
+    public void onSignUpFailed(String responseString) {
+        Snackbar snack = Snackbar.make(content_frame, responseString, Snackbar.LENGTH_LONG);
+        snack.show();
     }
 }

@@ -15,6 +15,7 @@ import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -101,8 +102,18 @@ public class user extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Intent i=new Intent(user.this,Info_wall.class);
-        startActivity(i);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i=new Intent(user.this,Info_wall.class);
+                startActivity(i);
+
+                overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
+                finish();
+            }
+        }, 100);
+
+
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import java.util.HashMap;
 
 import mypocketvakil.example.com.score.NetworkCall.NetworkCall;
+import mypocketvakil.example.com.score.NetworkCall.NetworkKeys;
 import mypocketvakil.example.com.score.ResponseBean.SignUpResponseBean;
 import mypocketvakil.example.com.score.activity.Sign_up;
 
@@ -14,7 +15,7 @@ import mypocketvakil.example.com.score.activity.Sign_up;
  * Created by sanyam jain on 25-09-2016.
  */
 public class SignUpAsyncTask extends AsyncTask<SignUpResponseBean, SignUpResponseBean, SignUpResponseBean> {
-    private static final String url = "http://172.16.101.109:138/user/";
+
     ProgressDialog progressDialog;
     private HashMap<String, String> postdataparams;
     private Context context;
@@ -30,7 +31,7 @@ public class SignUpAsyncTask extends AsyncTask<SignUpResponseBean, SignUpRespons
 
     @Override
     protected SignUpResponseBean doInBackground(SignUpResponseBean... params) {
-        return NetworkCall.getInstance(context).signupData(url, postdataparams);
+        return NetworkCall.getInstance(context).signupData(NetworkKeys.NET_KEY.SIGNUP_URL, postdataparams);
     }
 
     @Override

@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mypocketvakil.example.com.score.NetworkParser.NetworkParser;
+import mypocketvakil.example.com.score.ResponseBean.BidResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.ForgotResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.LoginResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.PostResponseBean;
@@ -76,6 +77,13 @@ public class NetworkCall {
 
         return NetworkParser.parsePostData(result);
 
+    }
+
+    public BidResponseBean bidData(String url, HashMap postdataparams) {
+        String result = performPostCall(url, postdataparams);
+        Log.d("Response: ", "> " + result);
+
+        return NetworkParser.parseBidData(result);
     }
 
     private String performPostCall(String url, HashMap<String, String> postDataParams) {

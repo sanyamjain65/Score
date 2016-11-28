@@ -48,7 +48,7 @@ public class get extends Fragment {
 
 
 
-        listView = (ListView) view.findViewById(R.id.list);
+//        listView = (ListView) view.findViewById(R.id.list);
         GetAsyncTask task = new GetAsyncTask(g, getContext());
         task.execute();
     }

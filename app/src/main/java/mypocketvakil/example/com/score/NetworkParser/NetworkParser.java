@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import mypocketvakil.example.com.score.Preferences.SharedPreference;
+import mypocketvakil.example.com.score.ResponseBean.BidResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.ForgotResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.LoginResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.PostResponseBean;
@@ -317,6 +318,61 @@ public class NetworkParser {
 
         }
         return postresponsebean;
+
+    }
+
+    public BidResponseBean parseBidData(String response) {
+        BidResponseBean bidresponsebean = new BidResponseBean();
+        try {
+            if (response != null) {
+                JSONArray object = new JSONArray(response);
+                JSONObject o = object.getJSONObject(0);
+
+//                JSONObject object = new JSONObject(response);
+
+                responseString = o.getString("response");
+                errorCode = o.getInt("error");
+
+
+                /*userId=obj.getInt(NetworkKeys.NET_KEY.USER_ID.KEY);
+                user_email=obj.getString(NetworkKeys.NET_KEY.USER_EMAIL.KEY);
+                user_full_name=obj.getString(NetworkKeys.NET_KEY.USER_FULL_NAME.KEY);
+                access_token=obj.getString(NetworkKeys.NET_KEY.ACCESS_TOKEN.KEY);
+*/
+                if (errorCode == 0) {
+                    bidresponsebean.setErrorCode(errorCode);
+                    bidresponsebean.setResponseString(responseString);
+
+                   /* "access_token": "w3HPKOodd6qzmvu7aScjJVs3On0ZsgqDvMTJtdUs",
+                            "token_type": "Bearer",
+                            "expires_in": 36000,
+                            "partners": {
+                        "id": "1"
+                    /*String access_token = object.getString(NetworkKeys.NET_KEY.ACCESS_TOKEN.KEY);
+                    String token_type = object.getString(NetworkKeys.NET_KEY.TOKEN_TYPE.KEY);
+                    JSONObject partners = object.getJSONObject(NetworkKeys.NET_KEY.USER_DEVICE_TOKEN.KEY);
+                    String id = object.getString(NetworkKeys.NET_KEY.ID.KEY);
+
+                    loginResponseBean.setAccess_token(access_token);
+                    loginResponseBean.setId(id);
+                    loginResponseBean.setToken_type(token_type);*/
+//                    loginResponseBean.setUser(deviceToken);
+
+                } else {
+                    bidresponsebean.setErrorCode(errorCode);
+                    bidresponsebean.setResponseString(responseString);
+
+
+                }
+            }
+        } catch (JSONException e) {
+            bidresponsebean.setErrorCode(100);
+            bidresponsebean.setResponseString("Network Error");
+
+            e.printStackTrace();
+
+        }
+        return bidresponsebean;
 
     }
 }

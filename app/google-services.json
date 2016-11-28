@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "988478870378",
+    "firebase_url": "https://score-46f68.firebaseio.com",
+    "project_id": "score-46f68",
+    "storage_bucket": "score-46f68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988478870378:android:6aaf209497ffca9e",
+        "android_client_info": {
+          "package_name": "mypocketvakil.example.com.score"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988478870378-62hnnnh21ep1o6qu0qc9khfg5q1lgeou.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

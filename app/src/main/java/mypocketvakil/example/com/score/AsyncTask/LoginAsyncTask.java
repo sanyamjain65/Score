@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import java.util.HashMap;
 
 import mypocketvakil.example.com.score.NetworkCall.NetworkCall;
+import mypocketvakil.example.com.score.NetworkCall.NetworkKeys;
 import mypocketvakil.example.com.score.ResponseBean.LoginResponseBean;
 import mypocketvakil.example.com.score.activity.Login;
 
@@ -15,7 +16,6 @@ import mypocketvakil.example.com.score.activity.Login;
  */
 public class LoginAsyncTask extends AsyncTask<LoginResponseBean, LoginResponseBean, LoginResponseBean> {
 
-    private static final String url = "http://172.16.101.109:138/login/";
     ProgressDialog progressDialog;
     private HashMap postdataparams;
     private Context context;
@@ -29,7 +29,7 @@ public class LoginAsyncTask extends AsyncTask<LoginResponseBean, LoginResponseBe
 
     @Override
     protected LoginResponseBean doInBackground(LoginResponseBean... params) {
-        return NetworkCall.getInstance(context).loginData(url, postdataparams);
+        return NetworkCall.getInstance(context).loginData(NetworkKeys.NET_KEY.LOGIN_IN_URL, postdataparams);
     }
 
     @Override

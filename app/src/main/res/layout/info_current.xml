@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:id="@+id/info_current"
+        android:background="@drawable/info_bg"
+
+
+        android:layout_centerHorizontal="true">
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/you_are_here"
+            android:textAlignment="center"
+
+            android:textSize="20dp"
+            android:textColor="@color/AppColor"
+            app:font="@string/OpenSans_Reguler"/>
+
+
+        </RelativeLayout>
+
+</RelativeLayout>

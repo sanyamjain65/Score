@@ -1,4 +1,4 @@
-package mypocketvakil.example.com.score.fragment;
+package mypocketvakil.example.com.score.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -22,9 +22,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.util.Base64;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -36,8 +34,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.akashandroid90.googlesupport.location.AppLocationFragment;
-import com.github.akashandroid90.googlesupport.location.AppLocationSupportFragment;
+import com.github.akashandroid90.googlesupport.location.AppLocationActivity;
 import com.google.android.gms.common.ConnectionResult;
 
 import java.io.ByteArrayOutputStream;
@@ -50,17 +47,15 @@ import java.util.Random;
 import mypocketvakil.example.com.score.AsyncTask.PostAsyncTask;
 import mypocketvakil.example.com.score.JavaClasses.GeoLoc;
 import mypocketvakil.example.com.score.R;
-import mypocketvakil.example.com.score.activity.Location;
 
-
-public class Fragment_post extends AppLocationSupportFragment {
+public class Post extends AppLocationActivity {
     EditText et_work,et_detail,et_min,et_max;
     String category,duration;
     TextView tv_submit,tv_current_location,et_destination,tv_change;
     ImageView iv_image;
     final int CAMERA_CAPTURE = 1;
     final int PIC_CROP = 2;
-    View v;
+
     Button bt_post_paynow,bt_post_ondelivery;
     String pay,source_lat,source_long,dest_lat,dest_long,source_address,dest_address,id;
     boolean button=false;
@@ -70,27 +65,26 @@ public class Fragment_post extends AppLocationSupportFragment {
     double longitude;
 
 
-    private  Uri picUri;
+    private Uri picUri;
     private String filepath=null;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-       v = inflater.inflate(R.layout.fragment_fragment_post, container, false);
-        Spinner spinner = (Spinner) v.findViewById(R.id.spinner);
-        Spinner spinner1=(Spinner) v.findViewById(R.id.spinner1);
-        et_work=(EditText)v.findViewById(R.id.et_work);
-        tv_current_location=(TextView) v.findViewById(R.id.tv_current_location);
-        et_destination=(TextView)v.findViewById(R.id.et_destination);
-        et_detail=(EditText)v.findViewById(R.id.et_detail);
-        et_min=(EditText)v.findViewById(R.id.et_min);
-        et_max=(EditText)v.findViewById(R.id.et_max);
-        tv_submit=(TextView)v.findViewById(R.id.tv_submit);
-        iv_image=(ImageView)v.findViewById(R.id.iv_image);
-        tv_change=(TextView)v.findViewById(R.id.tv_change);
-        bt_post_paynow=(Button)v.findViewById(R.id.bt_post_paynow);
-        bt_post_ondelivery=(Button)v.findViewById(R.id.bt_post_ondelivery);
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_post);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner1=(Spinner) findViewById(R.id.spinner1);
+        et_work=(EditText)findViewById(R.id.et_work);
+        tv_current_location=(TextView) findViewById(R.id.tv_current_location);
+        et_destination=(TextView)findViewById(R.id.et_destination);
+        et_detail=(EditText)findViewById(R.id.et_detail);
+        et_min=(EditText)findViewById(R.id.et_min);
+        et_max=(EditText)findViewById(R.id.et_max);
+        tv_submit=(TextView)findViewById(R.id.tv_submit);
+        iv_image=(ImageView)findViewById(R.id.iv_image);
+        tv_change=(TextView)findViewById(R.id.tv_change);
+        bt_post_paynow=(Button)findViewById(R.id.bt_post_paynow);
+        bt_post_ondelivery=(Button)findViewById(R.id.bt_post_ondelivery);
         bt_post_paynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,9 +129,9 @@ public class Fragment_post extends AppLocationSupportFragment {
         iv_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ActivityCompat.checkSelfPermission(getActivity(),android.Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
+                if(ActivityCompat.checkSelfPermission(Post.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
                     picture();
-                else ActivityCompat.requestPermissions(getActivity(),new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
+                else ActivityCompat.requestPermissions(Post.this,new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
             }
         });
 
@@ -185,9 +179,9 @@ public class Fragment_post extends AppLocationSupportFragment {
         time.add("within 1 day");
 
 
-        ArrayAdapter timeadapter=new ArrayAdapter(this.getActivity(),android.R.layout.simple_spinner_item, time);
+        ArrayAdapter timeadapter=new ArrayAdapter(Post.this,android.R.layout.simple_spinner_item, time);
         // Creating adapter for spinner
-        ArrayAdapter dataAdapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter dataAdapter = new ArrayAdapter(Post.this, android.R.layout.simple_spinner_item, categories);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -200,12 +194,12 @@ public class Fragment_post extends AppLocationSupportFragment {
             @Override
             public void onClick(View v) {
                 String image;
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Post.this);
 
-                        id = String.valueOf(sharedPref.getInt("id", -1));
+                id = String.valueOf(sharedPref.getInt("id", -1));
                 if(filepath==null||filepath=="")
                 {
-                  image="no image";
+                    image="no image";
 
                 }
                 else{
@@ -230,7 +224,7 @@ public class Fragment_post extends AppLocationSupportFragment {
                 postdataparams.put("details",et_detail.getText().toString());
                 postdataparams.put("image",image);
 
-                PostAsyncTask task = new PostAsyncTask(getActivity(), postdataparams);
+                PostAsyncTask task = new PostAsyncTask(Post.this, postdataparams);
                 task.execute();
 
 
@@ -240,17 +234,9 @@ public class Fragment_post extends AppLocationSupportFragment {
 
             }
         });
-
-        return v;
-
-
     }
-
-
-
-
     private void picture() {
-        final Dialog dialog = new Dialog(getActivity());
+        final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.popup);
         WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
@@ -289,7 +275,7 @@ public class Fragment_post extends AppLocationSupportFragment {
                 } catch (ActivityNotFoundException anfe) {
                     //display an error message
                     String errorMessage = "Whoops - your device doesn't support capturing images!";
-                    Toast toast = Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(Post.this, errorMessage, Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -302,13 +288,13 @@ public class Fragment_post extends AppLocationSupportFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode==Activity.RESULT_OK)
+        if(resultCode== Activity.RESULT_OK)
         {
             if (requestCode==5)
             {
-                 source_lat=(String) data.getExtras().getString("lat");
-                 source_long=(String) data.getExtras().getString("long");
-                 source_address=(String) data.getExtras().getString("address");
+                source_lat=(String) data.getExtras().getString("lat");
+                source_long=(String) data.getExtras().getString("long");
+                source_address=(String) data.getExtras().getString("address");
                 et_destination.setText(source_address);
 
 
@@ -318,9 +304,9 @@ public class Fragment_post extends AppLocationSupportFragment {
         {
             if (requestCode==4)
             {
-                 dest_lat=(String) data.getExtras().getString("lat");
-                 dest_long=(String) data.getExtras().getString("long");
-                 dest_address=(String) data.getExtras().getString("address");
+                dest_lat=(String) data.getExtras().getString("lat");
+                dest_long=(String) data.getExtras().getString("long");
+                dest_address=(String) data.getExtras().getString("address");
                 tv_current_location.setText(dest_address);
 
 
@@ -339,7 +325,7 @@ public class Fragment_post extends AppLocationSupportFragment {
                 Bundle extras = data.getExtras();
 //get the cropped bitmap
 //                Bitmap thePic = extras.getParcelable("data");
-                ImageView picView = (ImageView) v.findViewById(R.id.iv_image);
+                ImageView picView = (ImageView) findViewById(R.id.iv_image);
 //display the returned cropped image
 //                picView.setImageBitmap(thePic);
                 Bitmap bitmap = extras.getParcelable("data");
@@ -371,7 +357,7 @@ public class Fragment_post extends AppLocationSupportFragment {
                 Bundle extras = data.getExtras();
 //get the cropped bitmap
 //                Bitmap thePic = extras.getParcelable("data");
-                ImageView picView = (ImageView) v.findViewById(R.id.iv_image);
+                ImageView picView = (ImageView) findViewById(R.id.iv_image);
 //display the returned cropped image
 //                picView.setImageBitmap(thePic);
                 Bitmap bitmap = extras.getParcelable("data");
@@ -448,7 +434,7 @@ public class Fragment_post extends AppLocationSupportFragment {
         } catch (ActivityNotFoundException anfe) {
             //display an error message
             String errorMessage = "Whoops - your device doesn't support the crop action!";
-            Toast toast = Toast.makeText(this.getActivity(), errorMessage, Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(Post.this, errorMessage, Toast.LENGTH_SHORT);
             toast.show();
         }
     }
@@ -476,7 +462,14 @@ public class Fragment_post extends AppLocationSupportFragment {
     public void onActivityResultError(int resultCode, ServiceError serviceError, ConnectionResult connectionResult) {
 
     }
+
+    public void onSuccessfulSignUp(String responseString) {
+        Intent i=new Intent (Post.this,user.class);
+        startActivity(i);
+    }
+
+    public void onSignUpFailed(String responseString) {
+        Intent i=new Intent (Post.this,Login.class);
+        startActivity(i);
+    }
 }
-
-
-

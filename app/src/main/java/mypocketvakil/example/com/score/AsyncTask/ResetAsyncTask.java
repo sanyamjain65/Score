@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import java.util.HashMap;
 
 import mypocketvakil.example.com.score.NetworkCall.NetworkCall;
+import mypocketvakil.example.com.score.NetworkCall.NetworkKeys;
 import mypocketvakil.example.com.score.ResponseBean.ResetResponseBean;
 import mypocketvakil.example.com.score.activity.Reset_password;
 
@@ -14,7 +15,7 @@ import mypocketvakil.example.com.score.activity.Reset_password;
  * Created by sanyam jain on 27-09-2016.
  */
 public class ResetAsyncTask extends AsyncTask<ResetResponseBean, ResetResponseBean, ResetResponseBean> {
-    private static final String url = "http://172.16.101.109:138/reset/";
+
     ProgressDialog progressDialog;
     private HashMap postdataparams;
     private Context context;
@@ -28,7 +29,7 @@ public class ResetAsyncTask extends AsyncTask<ResetResponseBean, ResetResponseBe
 
     @Override
     protected ResetResponseBean doInBackground(ResetResponseBean... params) {
-        return NetworkCall.getInstance(context).resetData(url, postdataparams);
+        return NetworkCall.getInstance(context).resetData(NetworkKeys.NET_KEY.RESET_PASSWORD_URL, postdataparams);
     }
 
     @Override

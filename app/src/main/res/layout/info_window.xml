@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:id="@+id/info_window"
+        android:background="@drawable/info_bg"
+
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/instagram"
+            android:layout_marginTop="6dp"
+            android:id="@+id/iv_info"
+            android:layout_centerHorizontal="true"/>
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_info"
+            android:text="@string/info_window_title"
+            android:textColor="@android:color/black"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_title"
+            app:font="@string/OpenSans_Reguler"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/black"
+            android:id="@+id/view1"/>
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:paddingRight="6dp"
+            android:paddingLeft="10dp"
+
+            android:layout_below="@+id/view1"
+            android:layout_marginTop="5dp"
+            android:text="@string/distance"
+            android:id="@+id/tv_distance"
+            app:font="@string/OpenSans_Reguler"/>
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+
+
+            android:layout_toRightOf="@+id/tv_distance"
+            android:layout_alignBottom="@+id/tv_distance"
+            android:layout_below="@+id/view1"
+            android:layout_marginTop="5dp"
+            android:text="@string/location"
+            android:id="@+id/tv_location"
+            app:font="@string/OpenSans_Reguler"/>
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+
+
+            android:layout_below="@+id/tv_location"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/budget"
+            android:id="@+id/tv_budget"
+            app:font="@string/OpenSans_Reguler"/>
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+
+
+            android:layout_toRightOf="@+id/tv_budget"
+            android:layout_alignBottom="@+id/tv_budget"
+
+
+            android:layout_marginTop="5dp"
+
+            android:text="@string/rupee_sign"
+            android:id="@+id/tv_rupeesign1"
+            app:font="@string/OpenSans_Reguler"/>
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_blue_dark"
+
+
+            android:layout_toRightOf="@+id/tv_rupeesign1"
+            android:layout_alignBottom="@+id/tv_rupeesign1"
+            android:layout_marginTop="5dp"
+
+            android:text="@string/min"
+            android:id="@+id/tv_min"
+            app:font="@string/OpenSans_Reguler"/>
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/AppColor"
+
+
+            android:layout_toRightOf="@+id/tv_min"
+            android:layout_alignBottom="@+id/tv_min"
+
+
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/hypen"
+            android:id="@+id/text7"
+            app:font="@string/OpenSans_Reguler"/>
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+
+
+            android:layout_toRightOf="@+id/text7"
+            android:layout_alignBottom="@+id/text7"
+
+            android:layout_marginLeft="5dp"
+
+            android:layout_marginTop="5dp"
+            android:text="@string/rupee_sign"
+            android:id="@+id/tv_rupeesign2"
+            app:font="@string/OpenSans_Reguler"/>
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_toRightOf="@+id/tv_rupeesign2"
+            android:layout_alignBottom="@+id/tv_rupeesign2"
+            android:layout_marginTop="5dp"
+            android:text="@string/max"
+            android:id="@+id/tv_max"
+            app:font="@string/OpenSans_Reguler"/>
+
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tv_bid"
+
+            android:layout_height="wrap_content"
+
+
+
+            android:textColor="@android:color/white"
+
+            android:text="@string/bid"
+            android:paddingLeft="90dp"
+            android:paddingRight="90dp"
+            android:layout_below="@+id/tv_max"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20sp"
+            android:background="@drawable/signup_button"
+            android:textSize="25sp"
+            android:layout_marginBottom="6dp"
+            app:font="@string/OpenSans_Reguler"
+            />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -8,30 +8,29 @@ import java.util.HashMap;
 
 import mypocketvakil.example.com.score.NetworkCall.NetworkCall;
 import mypocketvakil.example.com.score.NetworkCall.NetworkKeys;
-import mypocketvakil.example.com.score.ResponseBean.ForgotResponseBean;
-import mypocketvakil.example.com.score.activity.Forgot;
+import mypocketvakil.example.com.score.ResponseBean.BidResponseBean;
+import mypocketvakil.example.com.score.activity.Info_wall;
 
 /**
- * Created by sanyam jain on 27-09-2016.
+ * Created by sanyam jain on 28-11-2016.
  */
-public class ForgotAsyncTask extends AsyncTask<ForgotResponseBean, ForgotResponseBean, ForgotResponseBean> {
 
+public class BidAsyncTask extends AsyncTask<BidResponseBean,BidResponseBean,BidResponseBean> {
     ProgressDialog progressDialog;
-    private HashMap postdataparams;
-    private Context context;
+    HashMap postdataparams;
+    Context context;
     private String responseString;
+    String id;
 
-
-    public ForgotAsyncTask(Context context, HashMap<String, String> postdataparams) {
+    public BidAsyncTask(Context context, HashMap<String, String> postdataparams,String id) {
         this.context = context;
         this.postdataparams = postdataparams;
-
+        this.id=id;
     }
 
     @Override
-    protected ForgotResponseBean doInBackground(ForgotResponseBean... params) {
-        return NetworkCall.getInstance(context).forgotData(NetworkKeys.NET_KEY.FORGOT_PASSWORD, postdataparams);
-
+    protected BidResponseBean doInBackground(BidResponseBean... bidResponseBeen) {
+        return NetworkCall.getInstance(context).bidData(NetworkKeys.NET_KEY.BID+id+"/", postdataparams);
     }
 
     @Override
@@ -44,23 +43,23 @@ public class ForgotAsyncTask extends AsyncTask<ForgotResponseBean, ForgotRespons
     }
 
     @Override
-    protected void onPostExecute(ForgotResponseBean forgotResponseBean) {
-        super.onPostExecute(forgotResponseBean);
+    protected void onPostExecute(BidResponseBean bidResponseBean) {
+        super.onPostExecute(bidResponseBean);
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
-        if (forgotResponseBean != null && forgotResponseBean.getErrorCode() == 0) {
-            responseString = forgotResponseBean.getResponseString();
+        if (bidResponseBean != null && bidResponseBean.getErrorCode() == 0) {
+            responseString = bidResponseBean.getResponseString();
 //            Toast.makeText(context, loginResponseBean.getResponseString(), Toast.LENGTH_LONG).show();
-            ((Forgot) context).onSuccessfulSignUp(responseString);
+            ((Info_wall) context).onSuccessfulSignUp(responseString);
 
-        } else if (forgotResponseBean != null) {
-            responseString = forgotResponseBean.getResponseString();
+        } else if (bidResponseBean != null) {
+            responseString = bidResponseBean.getResponseString();
             // Toast.makeText(context, loginResponseBean.getResponseString(), Toast.LENGTH_LONG).show();
-            ((Forgot) context).onSignUpFailed(responseString);
+            ((Info_wall) context).onSignUpFailed(responseString);
         } else {
             //Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show();
-            ((Forgot) context).onSignUpFailed("Network error");
+            ((Info_wall) context).onSignUpFailed("Network error");
         }
     }
 }

@@ -7,14 +7,12 @@ import android.os.AsyncTask;
 import java.util.HashMap;
 
 import mypocketvakil.example.com.score.NetworkCall.NetworkCall;
+import mypocketvakil.example.com.score.NetworkCall.NetworkKeys;
 import mypocketvakil.example.com.score.ResponseBean.PostResponseBean;
-import mypocketvakil.example.com.score.activity.Info_wall;
+import mypocketvakil.example.com.score.activity.Post;
 
-/**
- * Created by sanyam jain on 09-10-2016.
- */
+
 public class PostAsyncTask extends AsyncTask<PostResponseBean, PostResponseBean, PostResponseBean> {
-    private static final String url = "http://172.16.101.109:138/post/";
     ProgressDialog progressDialog;
     private HashMap postdataparams;
     private Context context;
@@ -27,7 +25,7 @@ public class PostAsyncTask extends AsyncTask<PostResponseBean, PostResponseBean,
 
     @Override
     protected PostResponseBean doInBackground(PostResponseBean... params) {
-        return NetworkCall.getInstance(context).postData(url, postdataparams);
+        return NetworkCall.getInstance(context).postData(NetworkKeys.NET_KEY.POST_URL, postdataparams);
     }
 
     @Override
@@ -48,15 +46,15 @@ public class PostAsyncTask extends AsyncTask<PostResponseBean, PostResponseBean,
         if (postResponseBean != null && postResponseBean.getErrorCode() == 0) {
             responseString = postResponseBean.getResponseString();
 //            Toast.makeText(context, loginResponseBean.getResponseString(), Toast.LENGTH_LONG).show();
-            ((Info_wall) context).onSuccessfulSignUp(responseString);
+            ((Post) context).onSuccessfulSignUp(responseString);
 
         } else if (postResponseBean != null) {
             responseString = postResponseBean.getResponseString();
             // Toast.makeText(context, loginResponseBean.getResponseString(), Toast.LENGTH_LONG).show();
-            ((Info_wall)context).onSignUpFailed(responseString);
+            ((Post)context).onSignUpFailed(responseString);
         } else {
             //Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show();
-            ((Info_wall) context).onSignUpFailed("Network error");
+            ((Post) context).onSignUpFailed("Network error");
         }
     }
 }
