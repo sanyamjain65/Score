@@ -133,7 +133,7 @@ public class SimpleWakefulService extends AppLocationIntentService {
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
             conn.setReadTimeout(25000);
             conn.setConnectTimeout(25000);
-            conn.setRequestMethod("POST");
+            conn.setRequestMethod("PUT");
             conn.setDoInput(true);
             conn.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
@@ -213,7 +213,7 @@ public class SimpleWakefulService extends AppLocationIntentService {
                 postdataparams.put("user_id", id);
                 postdataparams.put("latitude", lat);
                 postdataparams.put("longitude", lng);
-                String result = performPostCall(NetworkKeys.NET_KEY.USER_LOCATION, postdataparams);
+                String result = performPostCall(NetworkKeys.NET_KEY.USER_LOCATION+id+"/", postdataparams);
                 parseLocData(result);
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "service not started", Toast.LENGTH_LONG).show();

@@ -19,22 +19,33 @@
             android:label="Score"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden">
+            android:windowSoftInputMode="adjustPan|stateHidden" >
 
         </activity>
-        <activity android:name=".activity.Login">
-
-
-        </activity>
-        <activity android:name=".activity.Forgot" />
-        <activity android:name=".activity.Reset_password" />
+        <activity
+            android:name=".activity.Login"
+            android:label="Score"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.Forgot"
+            android:label="Score"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.Reset_password"
+            android:label="Score"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
 
@@ -55,15 +66,41 @@
             android:value="AIzaSyA8sQXGPJgWufwxjUOplNPJ8psD2tzdTi4" />
 
         <activity android:name=".activity.Location" />
-        <activity android:name=".activity.user" />
-        <activity android:name=".activity.example">
+        <activity android:name=".activity.user">
+
+        </activity>
+        <activity android:name=".activity.example" />
+
+        <service android:name=".Services.SimpleWakefulService" />
+
+        <receiver android:name=".YourWakefulReciever" />
+
+        <activity
+            android:name=".activity.Post"
+            android:label="Score"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".activity.work_posted" />
+        <activity android:name=".activity.Notification" >
 
         </activity>
 
-        <service android:name=".Services.SimpleWakefulService" />
-        <receiver android:name=".YourWakefulReciever"/>
+        <service android:name=".notification.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".notification.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
 
-        <activity android:name=".activity.Post">
+        <activity android:name=".activity.Bid_Posted" />
+        <activity android:name=".activity.My_Bids" />
+        <activity android:name=".activity.Payment" />
+        <activity android:name=".activity.Account">
 
         </activity>
     </application>

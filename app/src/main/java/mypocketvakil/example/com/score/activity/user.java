@@ -19,29 +19,37 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.Random;
 
+import mypocketvakil.example.com.score.AsyncTask.ImageAsyncTask;
 import mypocketvakil.example.com.score.Preferences.SharedPreference;
 import mypocketvakil.example.com.score.R;
 
 
 public class user extends AppCompatActivity {
+    LinearLayout user_myworks,user_myposts,user_mypayment,user_myaccount;
+//    TextView user_myposts;
     final int a = 1;
     final int CAMERA_CAPTURE = 1;
     final int PIC_CROP = 2;
@@ -52,7 +60,10 @@ public class user extends AppCompatActivity {
     TextView tv_user_name;
     //captured picture uri
     private Uri picUri;
-    String name1;
+    String name1,id;
+    private String filepath=null;
+    String encodedImage;
+    HashMap<String,String> postdataparams;
   /*  public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,
                                    boolean filter) {
         float ratio = Math.min(
@@ -87,6 +98,7 @@ public class user extends AppCompatActivity {
         File file = new File (myDir, fname);
         if (file.exists ()) file.delete ();
         try {
+            filepath=getStringImage(finalBitmap);
             FileOutputStream out = new FileOutputStream(file);
             finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
@@ -97,7 +109,13 @@ public class user extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
 
     @Override
     public void onBackPressed() {
@@ -146,6 +164,25 @@ public class user extends AppCompatActivity {
 
 
                 picView.setImageBitmap(circleBitmap);
+                saveImage(circleBitmap);
+                String image;
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(user.this);
+
+                id = String.valueOf(sharedPref.getInt("id", -1));
+
+                if(filepath==null||filepath=="")
+                {
+                    image="no image";
+
+                }
+                else{
+                    image=filepath;
+
+                }
+                postdataparams = new HashMap<String, String>();
+                postdataparams.put("image",image);
+                ImageAsyncTask task=new ImageAsyncTask(user.this,postdataparams,id);
+                task.execute();
 
             }
 
@@ -180,6 +217,24 @@ public class user extends AppCompatActivity {
 
                 picView.setImageBitmap(circleBitmap);
                 saveImage(circleBitmap);
+                String image;
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(user.this);
+
+                id = String.valueOf(sharedPref.getInt("id", -1));
+
+                if(filepath==null||filepath=="")
+                {
+                    image="no image";
+
+                }
+                else{
+                    image=filepath;
+
+                }
+                postdataparams = new HashMap<String, String>();
+                postdataparams.put("image",image);
+                ImageAsyncTask task=new ImageAsyncTask(user.this,postdataparams,id);
+                task.execute();
 
             }
         }
@@ -221,7 +276,72 @@ public class user extends AppCompatActivity {
         mainimage = (ImageView) findViewById(R.id.mainimage);
         mainrelative = (RelativeLayout) findViewById(R.id.mainrelative);
         mainrelative = (RelativeLayout) findViewById(R.id.imagerelative);
+        user_myposts=(LinearLayout) findViewById(R.id.ll_user_myposts);
+        user_myworks=(LinearLayout) findViewById(R.id.user_myworks);
+        user_mypayment=(LinearLayout) findViewById(R.id.user_mypayments);
+        user_myaccount=(LinearLayout) findViewById(R.id.user_myaccount);
+        user_myaccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent=new Intent(user.this,Account.class);
+
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    }
+                },100);
+            }
+        });
+
+        user_mypayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent=new Intent(user.this,Payment.class);
+
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    }
+                },100);
+            }
+        });
+
+
+
+        user_myworks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent=new Intent(user.this,My_Bids.class);
+
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    }
+                },100);
+            }
+        });
         tv_user_name=(TextView)findViewById(R.id.tv_user_name);
+        user_myposts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent=new Intent(user.this,work_posted.class);
+
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    }
+                },100);
+            }
+        });
+
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(user.this);
         name1 = sharedPref.getString("name", null);
         tv_user_name.setText(name1);
@@ -302,5 +422,15 @@ public class user extends AppCompatActivity {
 
     }
 
+
+    public void onSuccessfulSignUp(String responseString) {
+        Snackbar snack=Snackbar.make(mainrelative,responseString,Snackbar.LENGTH_LONG);
+        snack.show();
+    }
+
+    public void onSignUpFailed(String responseString) {
+        Snackbar snack=Snackbar.make(mainrelative,responseString,Snackbar.LENGTH_LONG);
+        snack.show();
+    }
 }
 

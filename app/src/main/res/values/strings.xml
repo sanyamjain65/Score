@@ -67,4 +67,25 @@
     <string name="details1">Details:</string>
     <string name="km">KM</string>
     <string name="place_bid">Place your Bid</string>
+    <string name="work_posted">Work Posted</string>
+    <string name="postedon">Posted on:</string>
+    <string name="responses">Responses:</string>
+    <string name="number">Number</string>
+    <string name="user_name">Name</string>
+    <string name="accept">Accept</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="accepted">Acccepted</string>
+    <string name="Delivered">Delivered?</string>
+    <string name="mybids">My Bids</string>
+    <string name="status">Status</string>
+    <string name="post">Post</string>
+    <string name="transaction">Payment</string>
+    <string name="credits">50</string>
+    <string name="to">TO:</string>
+    <string name="account">Account</string>
+    <string name="mail">E-mail</string>
+    <string name="gender">Gender</string>
+    <string name="dob">D-O-B</string>
+    <string name="source">Source Add:</string>
+    <string name="clickhere">Click here</string>
 </resources>

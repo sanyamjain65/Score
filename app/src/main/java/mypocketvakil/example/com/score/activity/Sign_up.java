@@ -169,6 +169,9 @@ public class Sign_up extends AppCompatActivity {
 
 
                 else {
+
+//                    SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+//                    String regId = pref.getString("regId", null);
                     String fname = firstname.getText().toString();
                     String lname = lastname.getText().toString();
                     name = fname +" "+ lname;
@@ -180,6 +183,7 @@ public class Sign_up extends AppCompatActivity {
                     postdataparams.put("email", email.getText().toString());
                     postdataparams.put("gender", gender);
                     postdataparams.put("dob", dob.getText().toString());
+//                    postdataparams.put("registration_id",regId);
                     SignUpAsyncTask task = new SignUpAsyncTask(Sign_up.this, postdataparams);
                     task.execute();
                 }

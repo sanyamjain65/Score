@@ -15,14 +15,15 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/instagram"
+            android:src="@drawable/avatar"
+            android:background="@drawable/pic_border"
             android:layout_marginTop="6dp"
-            android:id="@+id/iv_info"
+            android:id="@+id/iv_info_window"
             android:layout_centerHorizontal="true"/>
         <mypocketvakil.example.com.score.custom.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_info"
+            android:layout_below="@+id/iv_info_window"
             android:text="@string/info_window_title"
             android:textColor="@android:color/black"
             android:paddingLeft="10dp"

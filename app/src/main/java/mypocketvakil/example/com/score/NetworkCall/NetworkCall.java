@@ -14,8 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mypocketvakil.example.com.score.NetworkParser.NetworkParser;
+import mypocketvakil.example.com.score.ResponseBean.AcceptResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.BidResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.ForgotResponseBean;
+import mypocketvakil.example.com.score.ResponseBean.ImageResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.LoginResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.PostResponseBean;
 import mypocketvakil.example.com.score.ResponseBean.ResetResponseBean;
@@ -78,12 +80,24 @@ public class NetworkCall {
         return NetworkParser.parsePostData(result);
 
     }
+    public AcceptResponseBean acceptData(String url, HashMap postdataparams) {
+        String result = performPatchCall(url, postdataparams);
+        Log.d("Response: ", "> " + result);
+
+        return NetworkParser.parseAcceptData(result);
+    }
 
     public BidResponseBean bidData(String url, HashMap postdataparams) {
         String result = performPostCall(url, postdataparams);
         Log.d("Response: ", "> " + result);
 
         return NetworkParser.parseBidData(result);
+    }
+    public ImageResponseBean imageData(String url, HashMap postdataparams) {
+        String result = performPatchCall(url, postdataparams);
+        Log.d("Response: ", "> " + result);
+
+        return NetworkParser.parseimageData(result);
     }
 
     private String performPostCall(String url, HashMap<String, String> postDataParams) {
@@ -97,6 +111,50 @@ public class NetworkCall {
             conn.setReadTimeout(25000);
             conn.setConnectTimeout(25000);
             conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+
+            wr.write(getPostDataString(postDataParams));
+            wr.flush();
+            wr.close();
+            responseCode = conn.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                String line;
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = br.readLine()) != null) {
+                    response += line;
+                }
+            } else if (responseCode == HttpURLConnection.HTTP_CREATED) {
+                String line;
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = br.readLine()) != null) {
+                    response += line;
+                }
+            } else {
+                response = "";
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        return response;
+
+
+    }
+    private String performPatchCall(String url, HashMap<String, String> postDataParams) {
+        String response = "";
+        try {
+            URL url1;
+
+            url1 = new URL(url);
+
+            HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
+            conn.setReadTimeout(25000);
+            conn.setConnectTimeout(25000);
+            conn.setRequestMethod("PATCH");
             conn.setDoInput(true);
             conn.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
@@ -131,6 +189,7 @@ public class NetworkCall {
 
     }
 
+
     private String getPostDataString(HashMap<String, String> params) throws
             UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
@@ -149,6 +208,7 @@ public class NetworkCall {
         }
         return result.toString();
     }
+
 
 
 }

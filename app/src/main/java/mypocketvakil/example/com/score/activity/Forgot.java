@@ -41,7 +41,7 @@ public class Forgot extends AppCompatActivity {
                 id = String.valueOf(sharedPref.getInt("id", -1));
                 postdataparams = new HashMap<String, String>();
                 postdataparams.put("email", et_forgot_email.getText().toString());
-                postdataparams.put("user_id", id);
+//                postdataparams.put("user_id", id);
                 ForgotAsyncTask task = new ForgotAsyncTask(Forgot.this, postdataparams);
                 task.execute();
             }

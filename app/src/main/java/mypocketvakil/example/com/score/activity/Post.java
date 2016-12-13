@@ -17,9 +17,11 @@ import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
@@ -65,6 +67,7 @@ public class Post extends AppLocationActivity {
     double longitude;
 
 
+
     private Uri picUri;
     private String filepath=null;
 
@@ -85,6 +88,9 @@ public class Post extends AppLocationActivity {
         tv_change=(TextView)findViewById(R.id.tv_change);
         bt_post_paynow=(Button)findViewById(R.id.bt_post_paynow);
         bt_post_ondelivery=(Button)findViewById(R.id.bt_post_ondelivery);
+        Toolbar toolbar=(Toolbar)findViewById(R.id.post_toolbar);
+        TextView tv_toolbar=(TextView)toolbar.findViewById(R.id.tv_toolbar);
+        tv_toolbar.setText(R.string.post);
         bt_post_paynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -290,24 +296,24 @@ public class Post extends AppLocationActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode== Activity.RESULT_OK)
         {
-            if (requestCode==5)
+            if (requestCode==4)
             {
                 source_lat=(String) data.getExtras().getString("lat");
                 source_long=(String) data.getExtras().getString("long");
                 source_address=(String) data.getExtras().getString("address");
-                et_destination.setText(source_address);
+                tv_current_location.setText(source_address);
 
 
             }
         }
         if (resultCode== Activity.RESULT_OK)
         {
-            if (requestCode==4)
+            if (requestCode==5)
             {
                 dest_lat=(String) data.getExtras().getString("lat");
                 dest_long=(String) data.getExtras().getString("long");
                 dest_address=(String) data.getExtras().getString("address");
-                tv_current_location.setText(dest_address);
+                et_destination.setText(dest_address);
 
 
 
@@ -342,6 +348,7 @@ public class Post extends AppLocationActivity {
                 Canvas c = new Canvas(circleBitmap);
                 c.drawRoundRect(rectF, roundPx, roundPx, paint);
                 picView.setImageBitmap(circleBitmap);
+                saveImage(circleBitmap);
 
             }
 
@@ -464,12 +471,20 @@ public class Post extends AppLocationActivity {
     }
 
     public void onSuccessfulSignUp(String responseString) {
-        Intent i=new Intent (Post.this,user.class);
-        startActivity(i);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i=new Intent(Post.this,Info_wall.class);
+                startActivity(i);
+
+                overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
+                finish();
+            }
+        }, 100);
     }
 
     public void onSignUpFailed(String responseString) {
-        Intent i=new Intent (Post.this,Login.class);
-        startActivity(i);
+        Toast.makeText(Post.this,responseString,Toast.LENGTH_LONG);
+
     }
 }

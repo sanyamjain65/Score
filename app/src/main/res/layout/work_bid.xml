@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@drawable/list_selector"
+    android:layout_height="wrap_content"
+
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
+    <ImageView
+
+        android:id="@+id/iv_list_workbid"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/avatar"
+        android:background="@drawable/pic_border"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"/>
+
+
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_workbidlist_name"
+        android:text="@string/user_name"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:paddingLeft="10dp"
+        android:layout_toRightOf="@+id/iv_list_workbid"
+        android:layout_toEndOf="@+id/iv_list_workbid"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp"
+        app:font="@string/OpenSans_Reguler"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        />
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+
+
+        android:layout_below="@+id/tv_workbidlist_name"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="10dp"
+
+
+        android:layout_toRightOf="@+id/iv_list_workbid"
+        android:layout_toEndOf="@+id/iv_list_workbid"
+
+
+        android:layout_marginTop="5dp"
+
+        android:text="@string/rupee_sign"
+        android:id="@+id/tv_workbidlist_rupeesign1"
+        app:font="@string/OpenSans_Reguler"/>
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_workbidlist_budget"
+        android:text="@string/money"
+        android:textColor="#1f998b"
+        android:textSize="20sp"
+        android:paddingLeft="3dp"
+        android:layout_toRightOf="@+id/tv_workbidlist_rupeesign1"
+        android:layout_toEndOf="@+id/tv_workbidlist_rupeesign1"
+        android:paddingRight="10dp"
+        android:layout_below="@+id/tv_workbidlist_name"
+
+        app:font="@string/OpenSans_Reguler"
+        android:layout_alignTop="@+id/tv_workbidlist_rupeesign1"
+        />
+
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_accept"
+
+        android:layout_height="wrap_content"
+
+
+
+        android:textColor="@android:color/white"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+
+        android:text="@string/accept"
+
+        android:background="@drawable/signup_button"
+        android:textSize="20sp"
+        app:font="@string/OpenSans_Reguler"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

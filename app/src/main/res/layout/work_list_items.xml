@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@drawable/list_selector"
+    android:layout_height="wrap_content"
+
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
+    <ImageView
+
+        android:id="@+id/iv_work_list"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/instagram"
+        android:background="@drawable/round_pic"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"/>
+
+
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_list_title"
+        android:text="@string/title"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:paddingLeft="5dp"
+        android:layout_toRightOf="@+id/iv_work_list"
+        android:layout_toEndOf="@+id/iv_work_list"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp"
+        app:font="@string/OpenSans_Reguler"
+        android:layout_marginLeft="10dp"
+        />
+  <!--  <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_list_response"
+        android:text="@string/responses"
+        android:textColor="@android:color/black"
+        android:alpha="0.7"
+        android:textSize="15sp"
+        android:layout_below="@+id/tv_list_title"
+        android:layout_toRightOf="@+id/iv_list_work"
+        android:layout_toEndOf="@+id/iv_list_work"
+        android:paddingLeft="15dp"
+
+        android:paddingRight="3dp"
+        app:font="@string/OpenSans_Reguler"
+        android:layout_marginLeft="3dp"
+        />
+
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_list_number"
+        android:text="@string/number"
+        android:textColor="@android:color/black"
+        android:alpha="0.7"
+        android:textSize="15sp"
+        android:layout_below="@+id/tv_list_title"
+
+        android:layout_toRightOf="@+id/tv_list_response"
+        android:layout_toEndOf="@+id/tv_list_response"
+        android:layout_alignTop="@+id/tv_list_response"
+        android:paddingRight="10dp"
+        app:font="@string/OpenSans_Reguler"
+        android:layout_marginLeft="3dp"
+        />
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_list_postedon"
+        android:text="@string/postedon"
+        android:textColor="@color/login_gray_color"
+        android:textSize="15sp"
+        android:layout_below="@+id/tv_list_response"
+        android:paddingLeft="15dp"
+        android:layout_toRightOf="@+id/iv_list_work"
+        android:layout_toEndOf="@+id/iv_list_work"
+        android:paddingRight="2dp"
+        app:font="@string/OpenSans_Reguler"
+        android:layout_marginLeft="3dp"
+        />
+    <mypocketvakil.example.com.score.custom.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_list_posted"
+        android:text="@string/postedon"
+        android:textColor="@color/login_gray_color"
+        android:textSize="15sp"
+        android:layout_below="@+id/tv_list_title"
+
+        android:layout_toRightOf="@+id/tv_list_postedon"
+        android:layout_toEndOf="@+id/tv_list_postedon"
+        android:layout_alignTop="@+id/tv_list_postedon"
+        android:paddingRight="10dp"
+        app:font="@string/OpenSans_Reguler"
+        android:layout_marginLeft="3dp"
+        />!-->
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/next"
+        android:layout_centerVertical="true"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="5dp"/>
+
+
+</RelativeLayout>

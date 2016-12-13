@@ -35,17 +35,27 @@ public class NetworkKeys {
             this.KEY = key;
         }
 
-        public static String BASE_URL = "http://172.16.101.109:138/";
-        public static  String SIGNUP_URL=BASE_URL+"user/";
-        public  static String LOGIN_IN_URL=BASE_URL+"login/";
+        public static String BASE_URL = "http://172.20.10.9:138/";
+        public static String SIGNUP_URL=BASE_URL+"user/";
+        public static String LOGIN_IN_URL=BASE_URL+"login/";
         public static String FORGOT_PASSWORD = BASE_URL + "email/";
-        public  static String RESET_PASSWORD_URL=BASE_URL+"reset/";
-        public  static String POST_URL=BASE_URL+"post/";
-        public  static String USER_LOCATION=BASE_URL+"userlocation/";
-        public  static String BID=BASE_URL+"post_response/";
-        public static String FAQ_URL=BASE_URL+"faq";
-        public static String FAQ_URL_HINDI=BASE_URL+"faqhindi";
-        public static String QUARY_URL=BASE_URL+"query";
+        public static String RESET_PASSWORD_URL=BASE_URL+"reset/";
+        public static String POST_URL=BASE_URL+"post/";
+        public static String USER_LOCATION=BASE_URL+"userlocation/";
+        public static String BID=BASE_URL+"post_response/";
+        public static String POST_USER=BASE_URL+"postuser/";
+        public static String POST_RESPONSE=BASE_URL+"post_response/";
+        public static String STATUS=BASE_URL+"status/";
+        public static String PAYMENT=BASE_URL+"payment/";
+        public static String MY_BIDS=BASE_URL+"response_post/";
+        public static String PASSBOOK=BASE_URL+"passbook/";
+        public static String ACCOUNT=BASE_URL+"profile/";
+
+
+
+
+
+
 
     }
 }

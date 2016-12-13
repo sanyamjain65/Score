@@ -1,12 +1,24 @@
 package mypocketvakil.example.com.score.activity;
 
+import android.Manifest;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,11 +26,13 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +42,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -36,7 +49,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -69,7 +81,7 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
     ListView listView;
     TextView name,tv_nav_name,tv_nav_email;
     ProgressDialog progressDialog;
-    ImageView iv_nav;
+    ImageView iv_nav,iv_wall;
     String jsonStr;
     ArrayList<HashMap<String, String>> contactlist;
     private TabLayout tabLayout;
@@ -77,23 +89,28 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
     GoogleMap map;
     int l;
     ProgressBar progressBar;
-    double lat[]=new double[20];
-    double longi[]=new double[20];
-    String title[]=new String[20];
-    String budget_min[]=new String[20];
-    String budget_max[]=new String[20];
-    String category[]=new String[20];
-    String time[]=new String[20];
-    String description[]=new String[20];
-    String distance[]=new String[20];
-    String payment[]=new String[20];
-    String user_id[]=new String[20];
-    String id1[]=new String[20];
+    double lat[]=new double[200];
+    double longi[]=new double[200];
+    String title[]=new String[200];
+    String budget_min[]=new String[200];
+    String budget_max[]=new String[200];
+    String category[]=new String[200];
+    String time[]=new String[200];
+    String description[]=new String[200];
+    String distance[]=new String[200];
+    String payment[]=new String[200];
+    String user_id[]=new String[200];
+    String id1[]=new String[200];
+    String source_add[]=new String[200];
+    private static final CharSequence[] MAP_TYPE_ITEMS =
+            {"Road Map", "Satellite", "Terrain", "Hybrid"};
 
-
+    String user_image[]=new String[20];
+    String work_image1[]=new String[200];
     HashMap<String,String> postdataparams;
     String bid;
     RelativeLayout content_frame;
+    ImageView iv_swap1;
 
     int c=0;
     int a,b;
@@ -119,7 +136,16 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
         AlarmManager alarm_manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarm_manager.setRepeating(AlarmManager.RTC, cur_cal.getTimeInMillis(), 60000, pi);
         Log.d("Testing", "alarm manager set");
-        Toast.makeText(Info_wall.this, "ServiceClass.onCreate()", Toast.LENGTH_LONG).show();
+
+        iv_wall=(ImageView)findViewById(R.id.iv_wall);
+        iv_swap1=(ImageView)findViewById(R.id.iv_swap1);
+        iv_swap1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showMapTypeSelectorDialog();
+            }
+        });
+
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map1);
@@ -131,6 +157,14 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
 //        progressBar.setVisibility(View.GONE);
         latitude=g.getLatitude();
         longitude=g.getLongitude();
+        View mapView = ((MapFragment) getFragmentManager().findFragmentById(R.id.map1)).getView();
+        View btnMyLocation = ((View) mapView.findViewById(1).getParent()).findViewById(2);
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(85, 85); // size of button in dp
+//        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        params.setMargins(620, 980, 10, 0);
+        btnMyLocation.setLayoutParams(params);
 //        Fragment_post f1=new Fragment_post();
 //
 //        Intent intent=getIntent();
@@ -163,6 +197,11 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
         tv_nav_email=(TextView)nav_name.findViewById(R.id.tv_nav_email);
         tv_nav_name=(TextView)nav_name.findViewById(R.id.tv_nav_name);
         iv_nav=(ImageView)nav_name.findViewById(R.id.iv_nav);
+
+        //navigationView.getMenu().getItem(3).setActionView(R.layout.wallet);
+
+//        TextView text=(TextView)e.findViewById(R.id.wallet_text);
+//        text.setText(60);
         String image=   SharedPreference.getInstance(this).getString("image_path");
         if(image!=null && image.length()>0){
             File file=new File(image);
@@ -183,6 +222,28 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
                         .bitmapTransform(new CircleTransform(this))
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(iv_nav);
+            }
+        }
+        String image1=   SharedPreference.getInstance(this).getString("image_path");
+        if(image1!=null && image1.length()>0){
+            File file=new File(image1);
+            if(file.exists()){
+                Glide.with(this).load(file)
+                        .crossFade()
+                        .thumbnail(0.5f)
+                        .bitmapTransform(new CircleTransform(this))
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(iv_wall);
+            }
+
+            else
+            {
+                Glide.with(this).load(image1)
+                        .crossFade()
+                        .thumbnail(0.5f)
+                        .bitmapTransform(new CircleTransform(this))
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(iv_wall);
             }
         }
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Info_wall.this);
@@ -229,6 +290,48 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
 
     }
 
+    private void showMapTypeSelectorDialog() {
+        // Prepare the dialog by setting up a Builder.
+        final String fDialogTitle = "Select Map Type";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(fDialogTitle);
+
+        // Find the current map type to pre-check the item representing the current state.
+        int checkItem = map.getMapType() - 1;
+
+        // Add an OnClickListener to the dialog, so that the selection will be handled.
+        builder.setSingleChoiceItems(
+                MAP_TYPE_ITEMS,
+                checkItem,
+                new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int item) {
+                        // Locally create a finalised object.
+
+                        // Perform an action depending on which item was selected.
+                        switch (item) {
+                            case 1:
+                                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                                break;
+                            case 2:
+                                map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                                break;
+                            case 3:
+                                map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                                break;
+                            default:
+                                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                        }
+                        dialog.dismiss();
+                    }
+                }
+        );
+
+        // Build the dialog and show it.
+        AlertDialog fMapTypeDialog = builder.create();
+        fMapTypeDialog.setCanceledOnTouchOutside(true);
+        fMapTypeDialog.show();
+    }
 
 
     @Override
@@ -296,9 +399,7 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
             },200);
 
 
-        } else if (id == R.id.settings) {
-
-        } else if (id == R.id.nav_share) {
+        }  else if (id == R.id.nav_share) {
 
         } else if (id == R.id.logout) {
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Info_wall.this);
@@ -322,10 +423,10 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
     public void onMapReady(final GoogleMap googleMap) {
         map=googleMap;
         final LatLng latLng = new LatLng(latitude, longitude);
-        current= googleMap.addMarker(new MarkerOptions()
-                .position(latLng)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        current.setTag(250);
+//        current= googleMap.addMarker(new MarkerOptions()
+//                .position(latLng)
+//                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+//        current.setTag(250);
         new getContacts().execute();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -335,6 +436,10 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
             }
         },2000);
 
+
+        if(ActivityCompat.checkSelfPermission(Info_wall.this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED)
+            map.setMyLocationEnabled(true);
+        else ActivityCompat.requestPermissions(Info_wall.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},100);
 
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -364,10 +469,15 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
                         @Override
                         public View getInfoWindow(Marker marker) {
                             View v = getLayoutInflater().inflate(R.layout.info_window, null);
+
                             TextView tv_title = (TextView) v.findViewById(R.id.tv_title);
                             TextView tv_location = (TextView) v.findViewById(R.id.tv_location);
                             TextView tv_min = (TextView) v.findViewById(R.id.tv_min);
                             TextView tv_max = (TextView) v.findViewById(R.id.tv_max);
+                            ImageView iv_info=(ImageView)v.findViewById(R.id.iv_info_window);
+                            byte[] decode= Base64.decode(user_image[a],Base64.DEFAULT);
+                            Bitmap decodebitmap= BitmapFactory.decodeByteArray(decode,0,decode.length);
+                            iv_info.setImageBitmap(decodebitmap);
                             tv_title.setText(title[a]);
                             tv_location.setText(distance[a]);
                             tv_min.setText(budget_min[a]);
@@ -412,6 +522,43 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
                     TextView tv_info_min=(TextView)dialog.findViewById(R.id.tv_info_min);
                     TextView tv_info_max=(TextView)dialog.findViewById(R.id.tv_info_max);
                     TextView tv_info_submit=(TextView)dialog.findViewById(R.id.tv_info_submit);
+                    TextView tv_info_address=(TextView)dialog.findViewById(R.id.tv_info_address);
+                    ImageView iv_info_user=(ImageView)dialog.findViewById(R.id.iv_info_user);
+                    ImageView iv_info_work=(ImageView)dialog.findViewById(R.id.iv_info_work);
+                    byte[] decode= Base64.decode(user_image[b],Base64.DEFAULT);
+                    Bitmap decodebitmap= BitmapFactory.decodeByteArray(decode,0,decode.length);
+                    iv_info_user.setImageBitmap(decodebitmap);
+                    byte[] decode1= Base64.decode(work_image1[b],Base64.DEFAULT);
+                    Bitmap decodebitmap1= BitmapFactory.decodeByteArray(decode1,0,decode1.length);
+                    tv_info_address.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Info_wall.this);
+                            builder.setCancelable(true);
+                            builder.setMessage(source_add[b]);
+
+                            AlertDialog fMapTypeDialog = builder.create();
+                            fMapTypeDialog.setCanceledOnTouchOutside(true);
+                            fMapTypeDialog.show();
+
+                        }
+                    });
+
+
+
+                    Bitmap circleBitmap = Bitmap.createBitmap(decodebitmap1.getWidth(), decodebitmap1.getHeight(), Bitmap.Config.ARGB_8888);
+                    final Rect rect = new Rect(0, 0, decodebitmap1.getWidth(), decodebitmap1.getHeight());
+                    final RectF rectF = new RectF(rect);
+                    final float roundPx = 1000;
+
+                    BitmapShader shader = new BitmapShader(decodebitmap1, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+                    Paint paint = new Paint();
+                    paint.setShader(shader);
+                    paint.setAntiAlias(true);
+                    Canvas c = new Canvas(circleBitmap);
+                    c.drawRoundRect(rectF, roundPx, roundPx, paint);
+                    iv_info_work.setImageBitmap(circleBitmap);
+
                     final EditText et_info_bid=(EditText)dialog.findViewById(R.id.et_info_bid);
                     tv_info_title.setText(title[b]);
                     tv_info_category1.setText(category[b]);
@@ -421,6 +568,7 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
                     tv_info_location.setText(distance[b]);
                     tv_info_min.setText(budget_min[b]);
                     tv_info_max.setText(budget_max[b]);
+
                     dialog.show();
 
 
@@ -489,6 +637,29 @@ public class Info_wall extends AppCompatActivity implements NavigationView.OnNav
                         description[i]=c.getString("details");
                         time[i]=c.getString("time");
                         user_id[i]=c.getString("user_id");
+                        source_add[i]=c.getString("source_address");
+                        String user_img=c.getString("usr_image");
+                        String work_img=c.getString("image");
+
+                        if(user_img.equals("no image")){
+                            user_image[i]="no image";
+
+                        }
+                        else{
+                            user_image[i]=user_img;
+
+//                            imageView.setImageBitmap(decodebitmap);
+                        }
+                        if(work_img.equals("no image")){
+                            work_image1[i]="no image";
+
+                        }
+                        else{
+                            work_image1[i]=work_img;
+
+//                            imageView.setImageBitmap(decodebitmap);
+                        }
+
 
 
 

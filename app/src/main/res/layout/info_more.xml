@@ -196,20 +196,7 @@
             android:id="@+id/tv_info_location"
             app:font="@string/OpenSans_Reguler"
             />
-        <mypocketvakil.example.com.score.custom.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@android:color/holo_blue_dark"
 
-
-            android:layout_below="@+id/tv_info_details"
-            android:layout_toRightOf="@+id/tv_info_location"
-            android:layout_alignTop="@+id/tv_info_location"
-            android:text="@string/km"
-            android:id="@+id/tv_info_km"
-            app:font="@string/OpenSans_Reguler"
-            />
         <mypocketvakil.example.com.score.custom.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -300,9 +287,37 @@
         <mypocketvakil.example.com.score.custom.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:paddingRight="6dp"
+            android:paddingLeft="10dp"
+
+            android:layout_below="@+id/tv_info_budget"
+            android:layout_marginTop="5dp"
+            android:text="@string/source"
+            android:id="@+id/tv_info_sourceadd"
+            app:font="@string/OpenSans_Reguler"/>
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:paddingLeft="10dp"
+            android:paddingRight="3dp"
+
+
+            android:layout_toRightOf="@+id/tv_info_sourceadd"
+            android:layout_alignTop="@+id/tv_info_sourceadd"
+            android:text="@string/clickhere"
+            android:id="@+id/tv_info_address"
+            app:font="@string/OpenSans_Reguler"
+            />
+        <mypocketvakil.example.com.score.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@color/violet"
-            android:layout_below="@+id/tv_info_budget"
+            android:layout_below="@+id/tv_info_sourceadd"
             android:layout_marginTop="25dp"
             android:text="@string/place_bid"
             android:paddingRight="6dp"
